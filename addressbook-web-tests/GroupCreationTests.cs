@@ -43,26 +43,22 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            driver.Navigate().GoToUrl(baseURL);
-            driver.FindElement(By.Name("user")).Click();
+            driver.Navigate().GoToUrl(baseURL);       
             driver.FindElement(By.Name("user")).Clear();
             driver.FindElement(By.Name("user")).SendKeys("admin");
-            driver.FindElement(By.Name("pass")).Click();
             driver.FindElement(By.Name("pass")).Clear();
             driver.FindElement(By.Name("pass")).SendKeys("secret");
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
             driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("new")).Click();
-            driver.FindElement(By.Name("group_name")).Click();
+            driver.FindElement(By.Name("new")).Click();        
             driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys("d");
-            driver.FindElement(By.Name("group_header")).Click();
+            driver.FindElement(By.Name("group_name")).SendKeys("d");            
             driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys("d");
-            driver.FindElement(By.Name("group_footer")).Click();
+            driver.FindElement(By.Name("group_header")).SendKeys("d");            
             driver.FindElement(By.Name("group_footer")).Clear();
             driver.FindElement(By.Name("group_footer")).SendKeys("d");
             driver.FindElement(By.Name("submit")).Click();
+            driver.FindElement(By.LinkText("group page")).Click();
             // ERROR: Caught exception [unknown command []]
         }
         private bool IsElementPresent(By by)
