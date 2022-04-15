@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 
 namespace addressbook_web_tests
@@ -10,5 +10,13 @@ namespace addressbook_web_tests
         public void TestMethod1()
         {
         }
+    }
+
+    internal class TestMethodAttribute : Attribute
+    {
+    }
+
+    internal class TestClassAttribute : Attribute
+    {
     }
 }
