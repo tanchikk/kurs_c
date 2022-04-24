@@ -40,7 +40,7 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void TheUntitledTestCaseTest()
+        public void СontactCreationTest()
         {
             OpenHomePage();
             Login(new AccountData("admin", "secret"));
