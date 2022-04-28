@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
@@ -11,95 +10,20 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    public class TestBase //класс для наследования (поля и классы public / protected для доступа к ним)
+    public class ContactHelper : HelperBase
     {
-        protected IWebDriver driver;
-        protected StringBuilder verificationErrors;
-        protected string baseURL;
-
-        [SetUp]
-        public void SetupTest()
+        public ContactHelper(ApplicationManager manager)
+            : base(manager)
         {
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook";
-            verificationErrors = new StringBuilder();
         }
-
-        [TearDown]
-        public void TeardownTest()
-        {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
-        }
-
-        protected void OpenHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL);
-        }
-
-        protected void Login(AccountData account)
-        {
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        }
-
-        //для группы начало
-        protected void GoToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-        }
-        protected void UnitGroupCreation()
-        {
-            driver.FindElement(By.Name("new")).Click();
-        }
-
-        protected void FillGroupForm(GroupData group)
-        {
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
-        }
-
-        protected void ReturnToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
-        protected void SubmitCreation() //нажатие кнопки (для контактов и групп)
-        {
-            driver.FindElement(By.Name("submit")).Click();
-        }
-
-        protected void SelectGroup(int index)
-        {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
-        }
-
-        protected void RemoveGroup()
-        {
-            driver.FindElement(By.Name("delete")).Click();
-        }
-        //для группы конец
 
         //для контактов начало
-        protected void UnitContactCreation()
+        public ContactHelper UnitContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
-        protected void FillContactForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
@@ -147,12 +71,29 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("phone2")).SendKeys(contact.Phone2);
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
+            return this;
         }
 
-        protected void ReturnToContactPage()
+        public ContactHelper CreateContact(ContactData contact)
+        {
+            UnitContactCreation();
+            FillContactForm(contact);
+            SubmitContactCreation();
+            ReturnToContactPage();
+            return this;
+        }
+
+        public ContactHelper ReturnToContactPage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
         //для контактов конец
+
+        public ContactHelper SubmitContactCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
     }
 }

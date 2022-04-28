@@ -11,20 +11,19 @@ namespace WebAddressbookTests
     {
         [Test]
         public void GroupCreationTest()
-        {
-            OpenHomePage();
-            Login(new AccountData("admin","secret"));
-            GoToGroupsPage();
-            UnitGroupCreation();
-            
+        {            
             GroupData group = new GroupData("aaa"); //тут нужен 1 конструктор с параметром name, с др полями не нужен
             group.Header = "ddd"; //необязат поля
-            group.Footer = "ccc";
-            FillGroupForm(group);
-            //если FillGroupForm(new GroupData("aaa")) - name передается тут, остальное задано в классе (напр, header = "")
-
-            SubmitCreation();
-            ReturnToGroupsPage();
-        }   
+            group.Footer = "ccc";            
+            app.Groups.CteateGroup(group); // переименовать в Cteate
+        }
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+            app.Groups.CteateGroup(group); // CteateGroup с методами вынесен в GroupHelper
+        }
     }
 }
