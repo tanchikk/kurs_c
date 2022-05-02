@@ -61,16 +61,7 @@ namespace WebAddressbookTests
             Type(By.Name("group_header"), group.Header);
             Type(By.Name("group_footer"), group.Footer);
             return this;
-        }
-
-        public void Type(By locator, string text)
-        {
-            if (text != null)
-            {
-                driver.FindElement(locator).Clear(); //вместо driver.FindElement(By.Name("group_header")).Clear()
-                driver.FindElement(locator).SendKeys(text); //вместо driver.FindElement(By.Name("group_header")).SendKeys(group.Header)
-            }            
-        }
+        }        
 
         public GroupHelper ReturnToGroupsPage()
         {
