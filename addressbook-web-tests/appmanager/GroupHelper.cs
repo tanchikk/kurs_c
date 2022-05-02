@@ -25,15 +25,27 @@ namespace WebAddressbookTests
             SubmitGroupCreation();
             ReturnToGroupsPage();
             return this;
-        }
+        }     
 
         public GroupHelper Removal(int v)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(1);
+            SelectGroup(v);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
+        }
+
+        public GroupHelper Modify(int v, GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(v);
+            UnitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+            return this;
+
         }
 
         //для групп начало
@@ -76,6 +88,19 @@ namespace WebAddressbookTests
         public GroupHelper SubmitGroupCreation() 
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+
+        //для модификации (метод Modify тут)
+        public GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public GroupHelper UnitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
             return this;
         }
     }

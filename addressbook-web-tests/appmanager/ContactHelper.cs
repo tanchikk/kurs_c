@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
@@ -12,10 +13,51 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
+
+        //protected bool acceptNextAlert = true;
+
         public ContactHelper(ApplicationManager manager)
             : base(manager)
         {
         }
+
+        public ContactHelper CreateContact(ContactData contact)
+        {
+            UnitContactCreation();
+            FillContactForm(contact);
+            SubmitContactCreation();
+            ReturnToContactPage();
+            return this;
+        }
+
+        public ContactHelper RemovalContact(int v)
+        {
+            SelectContact(v);
+            RemoveContact();
+            manager.Navigator.OpenHomePage();
+            return this;
+        }
+
+        public ContactHelper Modify(ContactData newContact)
+        {
+            UnitContactModification();
+            FillContactForm(newContact);
+            SubmitContactModification();
+            manager.Navigator.OpenHomePage();
+            return this;
+
+        }
+
+        public ContactHelper DetailsModify(ContactData newContact)
+        {
+            UnitDetailsContactModification();
+            ModifiyDetailsContact();
+            FillContactForm(newContact);
+            SubmitContactModification();
+            manager.Navigator.OpenHomePage();
+            return this;
+
+        }  
 
         //для контактов начало
         public ContactHelper UnitContactCreation()
@@ -23,6 +65,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }
+
         public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Clear();
@@ -72,27 +115,57 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
             return this;
-        }
-
-        public ContactHelper CreateContact(ContactData contact)
-        {
-            UnitContactCreation();
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToContactPage();
-            return this;
-        }
+        }        
 
         public ContactHelper ReturnToContactPage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
-        //для контактов конец
 
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+        //для контактов конец
+
+        public ContactHelper RemoveContact()
+        {
+            //acceptNextAlert = true;
+            driver.FindElement(By.XPath("(//input[@value='Delete'])")).Click();
+            //Assert.IsTrue(System.Text.RegularExpressions.Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
+            driver.SwitchTo().Alert().Accept();            
+            return this;
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public ContactHelper UnitContactModification()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            return this;
+        }
+      
+
+        public ContactHelper UnitDetailsContactModification()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Details']")).Click();
+            return this;
+        }
+        public ContactHelper ModifiyDetailsContact()
+        {
+            driver.FindElement(By.Name("modifiy")).Click();
             return this;
         }
     }
