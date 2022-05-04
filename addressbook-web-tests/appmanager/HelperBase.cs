@@ -29,5 +29,18 @@ namespace WebAddressbookTests
                 driver.FindElement(locator).SendKeys(text); //вместо driver.FindElement(By.Name("group_header")).SendKeys(group.Header)
             }
         }
+
+        public bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
     }
 }
