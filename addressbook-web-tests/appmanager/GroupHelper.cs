@@ -15,7 +15,7 @@ namespace WebAddressbookTests
         public GroupHelper(ApplicationManager manager) 
             : base(manager)
         {
-        }        
+        }   
 
         public GroupHelper CteateGroup(GroupData group) //перенос посторных методов в [Test]-ах
         {
@@ -27,14 +27,37 @@ namespace WebAddressbookTests
             return this;
         }     
 
-        public GroupHelper Removal(int v)
+        
+        public GroupHelper Removal(int v, GroupData group)
         {
+            if (GroupCreated()) 
+            {
+                if (GroupCreated(group))
+                {
+                    return this;
+                }
+
+                CteateGroup(group);
+            }        
+
             manager.Navigator.GoToGroupsPage();
             SelectGroup(v);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
         }
+
+        public bool GroupCreated(GroupData group)
+        {
+            return GroupCreated()
+                && IsElementPresent(By.Name("edit"));
+        }
+
+        public bool GroupCreated()
+        {
+            return IsElementPresent(By.Name("new"));
+        }
+
 
         public GroupHelper Modify(int v, GroupData newData)
         {

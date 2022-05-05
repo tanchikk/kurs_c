@@ -10,9 +10,21 @@ namespace WebAddressbookTests
     public class GroupRemovalTests : AuthTestBase //наследник теста
     {
         [Test]
+        // public void GroupRemovalTest()
+        // {
+        //     app.Groups.Removal(1);
+        // }
         public void GroupRemovalTest()
         {
-            app.Groups.Removal(1);
+            //действие
+            GroupData group = new GroupData("aaa"); 
+            group.Header = "ddd"; 
+            group.Footer = "ccc";
+            app.Groups.Removal(1, group);
+
+            //проверка
+            Assert.IsTrue(app.Groups.GroupCreated(group));
         }
+
     }
 }
