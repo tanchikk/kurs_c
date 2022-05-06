@@ -13,10 +13,14 @@ namespace WebAddressbookTests
         [Test]
         public void GroupModificationTest()
         {
+            //действие
             GroupData newData = new GroupData("zzz");
             newData.Header = "ttt";
             newData.Footer = "kkk";
             app.Groups.Modify(1, newData);
+
+            //проверка
+            Assert.IsFalse(app.Groups.GroupCreated(newData)); //false
         }
     }
 }

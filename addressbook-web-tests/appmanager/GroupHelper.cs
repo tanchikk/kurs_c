@@ -50,24 +50,34 @@ namespace WebAddressbookTests
         public bool GroupCreated(GroupData group)
         {
             return GroupCreated()
-            && driver.FindElement(By.XPath("//div[@id='content']/form/span")).Text == "(" + group.Name + ")";
+            && driver.FindElement(By.XPath("//div[@id='content']/form/span")).Text == "(" + group.Name + ")"; 
+            //проверка на определенную переменную
         }
 
         public bool GroupCreated()
         {
-            return IsElementPresent(By.Name("selected[]"));
+            return IsElementPresent(By.Name("selected[]")); //проверка на наличие чек-бокса
         }
 
 
-        public GroupHelper Modify(int v, GroupData newData)
+        public void Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
+
+            if (GroupCreated() == false)
+            {
+                if (GroupCreated(newData))
+                {
+                    return;
+                }
+                CteateGroup(newData);
+            }
+
             SelectGroup(v);
             UnitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
-            ReturnToGroupsPage();
-            return this;
+            ReturnToGroupsPage();       
 
         }
 
