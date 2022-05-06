@@ -28,34 +28,34 @@ namespace WebAddressbookTests
         }     
 
         
-        public GroupHelper Removal(int v, GroupData group)
+        public void Removal(int v, GroupData group) //поставила void
         {
-            if (GroupCreated()) 
+            manager.Navigator.GoToGroupsPage();
+
+            if (GroupCreated() == false) 
             {
                 if (GroupCreated(group))
                 {
-                    return this;
+                    return;
                 }
-
                 CteateGroup(group);
-            }        
-
-            manager.Navigator.GoToGroupsPage();
+            }
+            
             SelectGroup(v);
             RemoveGroup();
             ReturnToGroupsPage();
-            return this;
+            //return this;
         }
 
         public bool GroupCreated(GroupData group)
         {
             return GroupCreated()
-                && IsElementPresent(By.Name("edit"));
+            && driver.FindElement(By.XPath("//div[@id='content']/form/span")).Text == "(" + group.Name + ")";
         }
 
         public bool GroupCreated()
         {
-            return IsElementPresent(By.Name("new"));
+            return IsElementPresent(By.Name("selected[]"));
         }
 
 

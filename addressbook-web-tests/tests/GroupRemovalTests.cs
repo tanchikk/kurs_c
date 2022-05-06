@@ -23,7 +23,7 @@ namespace WebAddressbookTests
             app.Groups.Removal(1, group);
 
             //проверка
-            Assert.IsTrue(app.Groups.GroupCreated(group));
+            Assert.IsFalse(app.Groups.GroupCreated(group)); //false
         }
 
     }
