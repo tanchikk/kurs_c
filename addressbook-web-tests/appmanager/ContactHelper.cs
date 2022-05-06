@@ -30,34 +30,70 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper RemovalContact(int v)
+        public void RemovalContact(int v, ContactData contact)
         {
+            if (ContactCreated() == false)
+            {
+                if (ContactCreated(contact) == false)
+                {
+                    CreateContact(contact);
+                }
+            }
+
             SelectContact(v);
             RemoveContact();
             manager.Navigator.OpenHomePage();
-            return this;
         }
 
-        public ContactHelper Modify(ContactData newContact)
+        
+
+        public void Modify(ContactData newContact)
         {
+            if (ContactCreated() == false)
+            {
+                if (ContactCreated(newContact) == false)
+                {
+                    CreateContact(newContact);
+                }
+            }
+
             UnitContactModification();
             FillContactForm(newContact);
             SubmitContactModification();
             manager.Navigator.OpenHomePage();
-            return this;
 
         }
 
-        public ContactHelper DetailsModify(ContactData newContact)
+        public void DetailsModify(ContactData newContact)
         {
+            if (ContactCreated() == false)
+            {
+                if (ContactCreated(newContact) == false)
+                {
+                    CreateContact(newContact);
+                }
+            }
+
             UnitDetailsContactModification();
             ModifiyDetailsContact();
             FillContactForm(newContact);
             SubmitContactModification();
             manager.Navigator.OpenHomePage();
-            return this;
 
-        }  
+        }
+
+        public bool ContactCreated(ContactData contact)
+        {
+            return ContactCreated()
+            //&& driver.FindElement(By.XPath("//div[@id='content']/form/span")).Text == "(" + contact.Firstname + ")";
+            && driver.FindElement(By.Name("entry")).FindElement(By.TagName("td")).Text
+                == "(" + contact.Firstname + ")";
+        }
+
+        public bool ContactCreated()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
 
         //для контактов начало
         public ContactHelper UnitContactCreation()

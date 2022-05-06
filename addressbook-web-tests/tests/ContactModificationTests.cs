@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
@@ -38,6 +39,8 @@ namespace WebAddressbookTests
 
             app.Contacts.Modify(newContact);
 
+            Assert.IsFalse(app.Contacts.ContactCreated(newContact));
+            Thread.Sleep(1000);
         }
 
         [Test]
@@ -67,6 +70,9 @@ namespace WebAddressbookTests
             newContact.Notes = "pam";
 
             app.Contacts.DetailsModify(newContact);
+
+            Assert.IsFalse(app.Contacts.ContactCreated(newContact));
+            Thread.Sleep(1000);
         }
     }
 }

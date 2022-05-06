@@ -34,13 +34,12 @@ namespace WebAddressbookTests
 
             if (GroupCreated() == false) 
             {
-                if (GroupCreated(group))
+                if (GroupCreated(group) == false)
                 {
-                    return;
+                    CteateGroup(group);
                 }
-                CteateGroup(group);
             }
-            
+
             SelectGroup(v);
             RemoveGroup();
             ReturnToGroupsPage();
@@ -66,11 +65,10 @@ namespace WebAddressbookTests
 
             if (GroupCreated() == false)
             {
-                if (GroupCreated(newData))
+                if (GroupCreated(newData) == false)
                 {
-                    return;
+                    CteateGroup(newData);
                 }
-                CteateGroup(newData);
             }
 
             SelectGroup(v);
