@@ -28,22 +28,13 @@ namespace WebAddressbookTests
         }     
 
         
-        public void Removal(int v, GroupData group) //поставила void
+        public GroupHelper Removal(int v) //поставила void
         {
             manager.Navigator.GoToGroupsPage();
-
-            if (GroupCreated() == false) 
-            {
-                if (GroupCreated(group) == false)
-                {
-                    CteateGroup(group);
-                }
-            }
-
             SelectGroup(v);
             RemoveGroup();
             ReturnToGroupsPage();
-            //return this;
+            return this;
         }
 
         public bool GroupCreated(GroupData group)

@@ -30,19 +30,12 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public void RemovalContact(int v, ContactData contact)
-        {
-            if (ContactCreated() == false)
-            {
-                if (ContactCreated(contact) == false)
-                {
-                    CreateContact(contact);
-                }
-            }
-
+        public ContactHelper RemovalContact(int v)
+        {       
             SelectContact(v);
             RemoveContact();
             manager.Navigator.OpenHomePage();
+            return this;
         }
 
         

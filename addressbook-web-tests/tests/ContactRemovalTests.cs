@@ -35,7 +35,16 @@ namespace WebAddressbookTests
             contact.Address2 = "Волгоград";
             contact.Phone2 = "+70000000009";
             contact.Notes = "pam";
-            app.Contacts.RemovalContact(1, contact);
+
+            if (app.Contacts.ContactCreated() == false)
+            {
+                if (app.Contacts.ContactCreated(contact) == false)
+                {
+                    app.Contacts.CreateContact(contact);
+                }
+            }
+
+            app.Contacts.RemovalContact(1);
 
             Assert.IsFalse(app.Contacts.ContactCreated(contact)); //false
         }

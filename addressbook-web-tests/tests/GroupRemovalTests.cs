@@ -16,11 +16,22 @@ namespace WebAddressbookTests
         // }
         public void GroupRemovalTest()
         {
-            //действие
-            GroupData group = new GroupData("aaa"); 
-            group.Header = "ddd"; 
+            app.Navigator.GoToGroupsPage();
+
+            GroupData group = new GroupData("aaa");
+            group.Header = "ddd";
             group.Footer = "ccc";
-            app.Groups.Removal(1, group);
+
+            if (app.Groups.GroupCreated() == false)
+            {
+                if (app.Groups.GroupCreated(group) == false)
+                {
+                    app.Groups.CteateGroup(group);
+                }
+            }
+
+            //действие            
+            app.Groups.Removal(1);
 
             //проверка
             Assert.IsFalse(app.Groups.GroupCreated(group)); //false
