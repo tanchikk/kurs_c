@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace WebAddressbookTests
@@ -10,10 +11,6 @@ namespace WebAddressbookTests
     public class GroupRemovalTests : AuthTestBase //наследник теста
     {
         [Test]
-        // public void GroupRemovalTest()
-        // {
-        //     app.Groups.Removal(1);
-        // }
         public void GroupRemovalTest()
         {
             app.Navigator.GoToGroupsPage();
@@ -29,11 +26,16 @@ namespace WebAddressbookTests
                     app.Groups.CteateGroup(group);
                 }
             }
+            
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            //действие            
-            app.Groups.Removal(1);
+            app.Groups.Removal(0); //само удаление
 
-            //проверка
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+
+            oldGroups.RemoveAt(0); //указываем, что удален 1й в списке элемент
+            Assert.AreEqual(oldGroups.Count, newGroups.Count); //прямое сравнение список
+
             Assert.IsFalse(app.Groups.GroupCreated(group)); //false
         }
 

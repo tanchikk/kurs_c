@@ -149,7 +149,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -175,6 +175,52 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("modifiy")).Click();
             return this;
+        }
+
+        // для списка
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+
+           
+
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement element in elements)
+            {
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
+            }
+            return contacts;
+
+
+            /*ICollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]"));
+            int i = 1;
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new ContactData(driver.FindElement(By.XPath("//tbody/tr[" + (i + 1) + "]/td[3]")).Text,
+                    driver.FindElement(By.XPath("//tbody/tr[" + (i + 1) + "]/td[2]")).Text));
+                i++;
+            }
+            return contacts;*/
+
+             
+            /*  ICollection<IWebElement> elementsLast = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[2]"));
+              ICollection<IWebElement> elementsFirst = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[3]"));
+            int i = 1;
+            foreach (IWebElement element in elementsLast)
+              {
+                      contacts.Add(new ContactData(driver.FindElement(By.XPath("//tbody/tr[" + (i + 1) + "]/td[2]")).Text,""));
+                      i++;
+              }
+
+              foreach (IWebElement element in elementsFirst)
+              {
+                  contacts.Add(new ContactData("", driver.FindElement(By.XPath("//tbody/tr[" + (i + 1) + "]/td[3]")).Text));
+                  i++;
+              }
+               return contacts;*/
+
+
         }
     }
 }

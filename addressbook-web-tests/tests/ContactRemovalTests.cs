@@ -44,7 +44,14 @@ namespace WebAddressbookTests
                 }
             }
 
-            app.Contacts.RemovalContact(1);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            app.Contacts.RemovalContact(0);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+
+            oldContacts.RemoveAt(0); //указываем, что удален 1й в списке элемент
+            Assert.AreEqual(oldContacts.Count, newContacts.Count); //прямое сравнение список
 
             Assert.IsFalse(app.Contacts.ContactCreated(contact)); //false
         }
