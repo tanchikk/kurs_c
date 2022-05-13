@@ -36,12 +36,12 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public bool GroupCreated(GroupData group)
+        /*public bool GroupCreated(GroupData group)
         {
             return GroupCreated()
-            && driver.FindElement(By.XPath("//div[@id='content']/form/span")).Text == "(" + group.Name + ")"; 
-            //проверка на определенную переменную
-        }
+                   && driver.FindElement(By.XPath("//div[@id='content']/form/span")).Text == "(" + group.Name + ")"; 
+            //пр*оверка на определенную переменную
+        }*/
 
         public bool GroupCreated()
         {
@@ -52,15 +52,6 @@ namespace WebAddressbookTests
         public void Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-
-            if (GroupCreated() == false)
-            {
-                if (GroupCreated(newData) == false)
-                {
-                    CteateGroup(newData);
-                }
-            }
-
             SelectGroup(v);
             UnitGroupModification();
             FillGroupForm(newData);

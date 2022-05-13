@@ -42,46 +42,28 @@ namespace WebAddressbookTests
 
         public void Modify(ContactData newContact)
         {
-            if (ContactCreated() == false)
-            {
-                if (ContactCreated(newContact) == false)
-                {
-                    CreateContact(newContact);
-                }
-            }
-
             UnitContactModification();
             FillContactForm(newContact);
             SubmitContactModification();
             manager.Navigator.OpenHomePage();
-
         }
 
         public void DetailsModify(ContactData newContact)
         {
-            if (ContactCreated() == false)
-            {
-                if (ContactCreated(newContact) == false)
-                {
-                    CreateContact(newContact);
-                }
-            }
-
             UnitDetailsContactModification();
             ModifiyDetailsContact();
             FillContactForm(newContact);
             SubmitContactModification();
             manager.Navigator.OpenHomePage();
-
         }        
 
-        public bool ContactCreated(ContactData contact)
+        /*public bool ContactCreated(ContactData contact)
         {
             return ContactCreated()
             //&& driver.FindElement(By.XPath("//div[@id='content']/form/span")).Text == "(" + contact.Firstname + ")";
             && driver.FindElement(By.Name("entry")).FindElement(By.TagName("td")).Text
                 == "(" + contact.Firstname + ")";
-        }
+        }*/
 
         public bool ContactCreated()
         {

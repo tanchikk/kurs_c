@@ -38,10 +38,7 @@ namespace WebAddressbookTests
 
             if (app.Contacts.ContactCreated() == false)
             {
-                if (app.Contacts.ContactCreated(contact) == false)
-                {
-                    app.Contacts.CreateContact(contact);
-                }
+                 app.Contacts.CreateContact(contact);
             }
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
@@ -55,7 +52,7 @@ namespace WebAddressbookTests
             oldContacts.RemoveAt(0); //указываем, что удален 1й в списке элемент
             Assert.AreEqual(oldContacts.Count, newContacts.Count); //прямое сравнение список
 
-            Assert.IsFalse(app.Contacts.ContactCreated(contact)); //false
+            Assert.IsTrue(app.Contacts.ContactCreated()); //false
         }
     }
 }

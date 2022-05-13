@@ -19,13 +19,10 @@ namespace WebAddressbookTests
             group.Header = "ddd";
             group.Footer = "ccc";
 
-            if (app.Groups.GroupCreated() == false)
-            {
-                if (app.Groups.GroupCreated(group) == false)
+                if (app.Groups.GroupCreated() == false)
                 {
                     app.Groups.CteateGroup(group);
                 }
-            }
             
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
@@ -38,7 +35,7 @@ namespace WebAddressbookTests
             oldGroups.RemoveAt(0); //указываем, что удален 1й в списке элемент
             Assert.AreEqual(oldGroups.Count, newGroups.Count); //прямое сравнение список
 
-            Assert.IsFalse(app.Groups.GroupCreated(group)); //false
+            Assert.IsTrue(app.Groups.GroupCreated()); 
         }
 
     }

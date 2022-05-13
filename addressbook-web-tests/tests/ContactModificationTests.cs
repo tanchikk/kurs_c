@@ -37,6 +37,11 @@ namespace WebAddressbookTests
             newContact.Phone2 = "+70000000009";
             newContact.Notes = "pam";
 
+            if (app.Contacts.ContactCreated() == false)
+            {
+                app.Contacts.CreateContact(newContact);
+            }
+
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Modify(newContact);

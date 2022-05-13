@@ -18,6 +18,11 @@ namespace WebAddressbookTests
             newData.Header = "ttt";
             newData.Footer = "kkk";
 
+            if (app.Groups.GroupCreated() == false)
+            {
+                app.Groups.CteateGroup(newData);
+            }
+
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Modify(0, newData); //сама модификация
@@ -32,7 +37,7 @@ namespace WebAddressbookTests
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
 
-            Assert.IsFalse(app.Groups.GroupCreated(newData)); //false
+            Assert.IsTrue(app.Groups.GroupCreated()); 
         }
     }
 }
