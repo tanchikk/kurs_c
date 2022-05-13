@@ -31,6 +31,8 @@ namespace WebAddressbookTests
 
             app.Groups.Removal(0); //само удаление
 
+            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount()); //минус 1, тк удаление
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
 
             oldGroups.RemoveAt(0); //указываем, что удален 1й в списке элемент

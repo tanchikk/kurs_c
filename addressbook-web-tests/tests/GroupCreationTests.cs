@@ -21,6 +21,8 @@ namespace WebAddressbookTests
 
             app.Groups.CteateGroup(group); //создание группы
 
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount()); //app.Groups.GetGroupCount() кол-во групп и сравнение 
+
             List<GroupData> newGroups = app.Groups.GetGroupList(); //получение списка групп После создания новой            
             
             //сортировка
@@ -41,6 +43,8 @@ namespace WebAddressbookTests
 
             app.Groups.CteateGroup(group); // CteateGroup с методами вынесен в GroupHelper
 
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList(); //получение списка групп После создания новой            
             
             //сортировка
@@ -60,6 +64,8 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList(); //получение списка групп До создания новой
 
             app.Groups.CteateGroup(group); // CteateGroup с методами вынесен в GroupHelper
+
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList(); //получение списка групп После создания новой
             

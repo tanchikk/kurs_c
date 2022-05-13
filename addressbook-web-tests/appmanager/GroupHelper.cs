@@ -99,6 +99,7 @@ namespace WebAddressbookTests
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
+            groupCache = null;
             return this;
         }
         //для группы конец
@@ -106,6 +107,7 @@ namespace WebAddressbookTests
         public GroupHelper SubmitGroupCreation() 
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null; //чтобы пошло перезаполнение кэша при добавлении (нажатии на кнопку)
             return this;
         }
 
@@ -113,6 +115,7 @@ namespace WebAddressbookTests
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -122,11 +125,29 @@ namespace WebAddressbookTests
             return this;
         }
 
-        // для списка
-        public List<GroupData> GetGroupList()
-        {
-            List<GroupData> groups = new List<GroupData>();
+        //для кэша
+        private List<GroupData> groupCache = null;
 
+        // для списка
+        public List<GroupData> GetGroupList() //переписали в кэш
+        {
+            if (groupCache == null) //если кэш пусотй - данные заполняются, иначе перезаполнения нет
+            {
+                groupCache = new List<GroupData>();
+                //List<GroupData> groups = new List<GroupData>();
+                //получение данных в список
+                manager.Navigator.GoToGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group")); //тэг span, класс group
+                                                                                                       // ICollection - общий тип, List - конкретный тип
+                foreach (IWebElement element in elements)
+                {
+                    groupCache.Add(new GroupData(element.Text));
+                }
+            }
+
+            return new List<GroupData>(groupCache); //кэш в список, тк просто кэш лучше не возвращать
+
+            /*List<GroupData> groups = new List<GroupData>();
             //получение данных в список
             manager.Navigator.GoToGroupsPage(); 
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group")); //тэг span, класс group
@@ -135,7 +156,11 @@ namespace WebAddressbookTests
             {
                 groups.Add(new GroupData(element.Text));
             }
-            return groups;
+            return groups;*/
+        }
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
         }
     }
 }
