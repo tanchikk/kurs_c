@@ -62,8 +62,8 @@ namespace WebAddressbookTests
         {
             return Lastname + Firstname;
         }
-        
-        public int CompareTo(ContactData other) // 0- объект равны, -1 тек.объект меньше, чем переданный
+
+        /*public int CompareTo(ContactData other) // 0- объект равны, -1 тек.объект меньше, чем переданный
         {
             if (Object.ReferenceEquals(other, null))
             {
@@ -76,6 +76,29 @@ namespace WebAddressbookTests
                 return 0;
             }
             return -1;
+        }*/
+
+        public int CompareTo(ContactData other) // 0- объект равны, -1 тек.объект меньше, чем переданный
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1; //тек.объект больше
+            }
+            //return Lastname.CompareTo(other.Lastname) ^ Firstname.CompareTo(other.Firstname);
+
+            if (Lastname.CompareTo(other.Lastname) == 0)
+            {
+                if (Firstname.CompareTo(other.Firstname) == 0)
+                {
+                    return 0;
+                }
+            }
+            return -1; 
+            /*if (Lastname.CompareTo(other.Lastname) == 0 && Firstname.CompareTo(other.Firstname) == 0)
+            {
+                return 0;
+            }
+            return -1;*/
         }
 
         public string Firstname
