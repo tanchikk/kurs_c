@@ -50,12 +50,12 @@ namespace WebAddressbookTests
             {
                 return true;
             }            
-            return Lastname == other.Lastname ^ Firstname == other.Firstname;
+            return Lastname == other.Lastname && Firstname == other.Firstname;
         }
 
         public override int GetHashCode() //для стандартных методов вшитых помечают словом override
         {
-            return Lastname.GetHashCode() ^ Firstname.GetHashCode();
+            return Lastname.GetHashCode() + Firstname.GetHashCode();
         }
 
         public override string ToString()
@@ -69,13 +69,13 @@ namespace WebAddressbookTests
             {
                 return 1; //тек.объект больше
             }
-            return Lastname.CompareTo(other.Lastname) ^ Firstname.CompareTo(other.Firstname);
-            
-            /*if (Lastname.CompareTo(other.Lastname) == 0 && Firstname.CompareTo(other.Firstname) == 0)
+            //return Lastname.CompareTo(other.Lastname) ^ Firstname.CompareTo(other.Firstname);
+
+            if (Lastname.CompareTo(other.Lastname) == 0 && Firstname.CompareTo(other.Firstname) == 0)
             {
                 return 0;
             }
-            return -1;*/
+            return -1;
         }
 
         public string Firstname

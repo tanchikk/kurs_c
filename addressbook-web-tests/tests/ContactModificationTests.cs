@@ -37,9 +37,18 @@ namespace WebAddressbookTests
             newContact.Phone2 = "+70000000009";
             newContact.Notes = "pam";
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Modify(newContact);
 
-            Assert.IsFalse(app.Contacts.ContactCreated(newContact));
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0].Firstname = newContact.Firstname;
+            oldContacts[0].Lastname = newContact.Lastname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+
+            //Assert.IsFalse(app.Contacts.ContactCreated(newContact));
             Thread.Sleep(1000);
         }
 
@@ -69,9 +78,17 @@ namespace WebAddressbookTests
             newContact.Phone2 = "+70000000009";
             newContact.Notes = "pam";
 
-            app.Contacts.DetailsModify(newContact);
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
-            Assert.IsFalse(app.Contacts.ContactCreated(newContact));
+            app.Contacts.Modify(newContact);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            oldContacts[0].Firstname = newContact.Firstname;
+            oldContacts[0].Lastname = newContact.Lastname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+
             Thread.Sleep(1000);
         }
     }

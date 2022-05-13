@@ -181,9 +181,6 @@ namespace WebAddressbookTests
         public List<ContactData> GetContactList()
         {
             List<ContactData> contacts = new List<ContactData>();
-
-           
-
             ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
             foreach (IWebElement element in elements)
             {
@@ -191,7 +188,6 @@ namespace WebAddressbookTests
                 contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
             }
             return contacts;
-
 
             /*ICollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]"));
             int i = 1;
@@ -202,25 +198,6 @@ namespace WebAddressbookTests
                 i++;
             }
             return contacts;*/
-
-             
-            /*  ICollection<IWebElement> elementsLast = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[2]"));
-              ICollection<IWebElement> elementsFirst = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[3]"));
-            int i = 1;
-            foreach (IWebElement element in elementsLast)
-              {
-                      contacts.Add(new ContactData(driver.FindElement(By.XPath("//tbody/tr[" + (i + 1) + "]/td[2]")).Text,""));
-                      i++;
-              }
-
-              foreach (IWebElement element in elementsFirst)
-              {
-                  contacts.Add(new ContactData("", driver.FindElement(By.XPath("//tbody/tr[" + (i + 1) + "]/td[3]")).Text));
-                  i++;
-              }
-               return contacts;*/
-
-
         }
     }
 }
