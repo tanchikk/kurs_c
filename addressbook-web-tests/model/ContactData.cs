@@ -88,6 +88,15 @@ namespace WebAddressbookTests
 
             if (Lastname.CompareTo(other.Lastname) == 0)
             {
+                return Firstname.CompareTo(other.Firstname);
+            }
+            else
+            {
+                return Lastname.CompareTo(other.Lastname);
+            }
+
+            /*if (Lastname.CompareTo(other.Lastname) == 0)
+            {
                 if (Firstname.CompareTo(other.Firstname) == 0)
                 {
                     return 0;
@@ -95,7 +104,7 @@ namespace WebAddressbookTests
                 return 1;
             }
             return -1;
-            /*if (Lastname.CompareTo(other.Lastname) == 0 && Firstname.CompareTo(other.Firstname) == 0)
+            if (Lastname.CompareTo(other.Lastname) == 0 && Firstname.CompareTo(other.Firstname) == 0)
             {
                 return 0;
             }

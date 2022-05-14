@@ -55,6 +55,14 @@ namespace WebAddressbookTests
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
-        }        
+        }
+
+        /*[Test]
+        public void TestContactComparator()
+        {
+            ContactData contact1 = new ContactData("Adam", "Smith");
+            ContactData contact2 = new ContactData("Bob", "Smith");
+            Assert.AreEqual(contact2.CompareTo(contact1), 1);
+        }*/
     }
 }
