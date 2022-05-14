@@ -45,7 +45,7 @@ namespace WebAddressbookTests
 
             app.Contacts.RemovalContact(0);
 
-            Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactsCount());
+           Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactsCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
 

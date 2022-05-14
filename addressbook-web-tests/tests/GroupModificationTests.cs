@@ -13,6 +13,8 @@ namespace WebAddressbookTests
         [Test]
         public void GroupModificationTest()
         {
+            app.Navigator.GoToGroupsPage();
+
             //действие
             GroupData newData = new GroupData("zzz");
             newData.Header = "ttt";
@@ -24,7 +26,8 @@ namespace WebAddressbookTests
             }
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-
+            GroupData oldData = oldGroups[0]; //запоминаем группу, которую будем менять
+            
             app.Groups.Modify(0, newData); //сама модификация
 
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount()); //не изменено кол-во
@@ -36,6 +39,14 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups) //проверка, что именно изменена та группа, которую выбрали вверху oldData
+            {
+                if (group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(group.Name, newData.Name);
+                }
+            }
 
             Assert.IsTrue(app.Groups.GroupCreated()); 
         }

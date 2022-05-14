@@ -131,8 +131,11 @@ namespace WebAddressbookTests
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group")); //тэг span, класс group
                                                                                                        // ICollection - общий тип, List - конкретный тип
                 foreach (IWebElement element in elements)
-                {
-                    groupCache.Add(new GroupData(element.Text));
+                {             
+                    groupCache.Add(new GroupData(element.Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
                 }
             }
 

@@ -8,13 +8,13 @@ namespace WebAddressbookTests
 {
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData> //для сравнения списков
     {
-        private string name;
-        private string header = "";
-        private string footer = "";
+        //private string name;
+        //private string header = "";
+        //private string footer = "";
 
         public GroupData(string name) //констурктор c name
         {
-            this.name = name;
+            Name = name;
         }
 
         public bool Equals(GroupData other) //метод для сравнения списков
@@ -51,41 +51,12 @@ namespace WebAddressbookTests
             return Name.CompareTo(other.Name); //сравнение Name групп
         }
 
-        public string Name 
-        {
-            get
-            {
-                return name; 
-            } 
+        public string Name { get; set; }
 
-            set
-            {
-                name = value;              
-            }
-        }
-        public string Header
-        {
-            get
-            {
-                return header;
-            }
+        public string Header { get; set; }
 
-            set
-            {
-                header = value;
-            }
-        }
-        public string Footer
-        {
-            get
-            {
-                return footer;
-            }
+        public string Footer { get; set; }   
 
-            set
-            {
-                footer = value;
-            }
-        }       
+        public string Id { get; set; }
     }
 }

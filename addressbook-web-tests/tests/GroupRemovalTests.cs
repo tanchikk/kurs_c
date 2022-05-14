@@ -15,14 +15,15 @@ namespace WebAddressbookTests
         {
             app.Navigator.GoToGroupsPage();
 
-            GroupData group = new GroupData("aaa");
-            group.Header = "ddd";
-            group.Footer = "ccc";
+            GroupData groupdata = new GroupData("aaa"); //groupdata - локальная переменная, можно по равзному назвать
+            groupdata.Header = "ddd";
+            groupdata.Footer = "ccc";
 
                 if (app.Groups.GroupCreated() == false)
                 {
-                    app.Groups.CteateGroup(group);
+                    app.Groups.CteateGroup(groupdata);
                 }
+            Assert.IsTrue(app.Groups.GroupCreated());
             
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
@@ -32,10 +33,17 @@ namespace WebAddressbookTests
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
 
+            GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0); //указываем, что удален 1й в списке элемент
             Assert.AreEqual(oldGroups.Count, newGroups.Count); //прямое сравнение список
+            Assert.AreEqual(oldGroups, newGroups);
 
-            Assert.IsTrue(app.Groups.GroupCreated()); 
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
+
+
         }
 
     }
