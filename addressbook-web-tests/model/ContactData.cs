@@ -94,7 +94,7 @@ namespace WebAddressbookTests
                 }
                 return Lastname.CompareTo(other.Lastname);
             }
-            return -1; 
+            return -1;
             /*if (Lastname.CompareTo(other.Lastname) == 0 && Firstname.CompareTo(other.Firstname) == 0)
             {
                 return 0;
