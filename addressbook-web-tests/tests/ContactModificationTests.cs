@@ -43,17 +43,28 @@ namespace WebAddressbookTests
             }
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData oldDataCon = oldContacts[0];
 
             app.Contacts.Modify(newContact);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactsCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
+
             oldContacts[0].Firstname = newContact.Firstname;
             oldContacts[0].Lastname = newContact.Lastname;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts) //проверка, что именно изменена та группа, которую выбрали вверху oldData
+            {
+                if (contact.Id == oldDataCon.Id)
+                {
+                    Assert.AreEqual(contact.Firstname, newContact.Firstname);
+                    Assert.AreEqual(contact.Lastname, newContact.Lastname);
+                }
+            }
 
             //Assert.IsFalse(app.Contacts.ContactCreated(newContact));
             Thread.Sleep(1000);
@@ -85,18 +96,34 @@ namespace WebAddressbookTests
             newContact.Phone2 = "+70000000009";
             newContact.Notes = "pam";
 
+            if (app.Contacts.ContactCreated() == false)
+            {
+                app.Contacts.CreateContact(newContact);
+            }
+
             List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData oldDataCon = oldContacts[0];
 
             app.Contacts.Modify(newContact);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactsCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
+
             oldContacts[0].Firstname = newContact.Firstname;
             oldContacts[0].Lastname = newContact.Lastname;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts) //проверка, что именно изменена та группа, которую выбрали вверху oldData
+            {
+                if (contact.Id == oldDataCon.Id)
+                {
+                    Assert.AreEqual(contact.Firstname, newContact.Firstname);
+                    Assert.AreEqual(contact.Lastname, newContact.Lastname);
+                }
+            }
 
             Thread.Sleep(1000);
         }

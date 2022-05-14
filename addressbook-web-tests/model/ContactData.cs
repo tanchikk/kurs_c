@@ -8,7 +8,7 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
+        /*private string firstname;
         private string lastname;
         private string middlename = "";
         private string nickname = "";
@@ -30,13 +30,13 @@ namespace WebAddressbookTests
         private string ayear = "";
         private string address2 = "";
         private string phone2 = "";
-        private string notes = "";
+        private string notes = "";*/
 
 
         public ContactData(string firstname, string lastname) //констурктор
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            Firstname = firstname;
+            Lastname = lastname;
         }
 
         public bool Equals(ContactData other) //метод для сравнения списков
@@ -111,298 +111,52 @@ namespace WebAddressbookTests
             return -1;*/
         }
 
-        public string Firstname
-        {
-            get 
-            { 
-                return firstname; 
-            }
-            
-            set
-            {
-                this.firstname = value;
-            }
-        }
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
+        public string Firstname { get; set; }
+        
+        public string Lastname { get; set; }       
 
-            set
-            {
-                this.lastname = value;
-            }
-        }
+        public string Middlename { get; set; }
 
-        public string Middlename
-        {
-            get
-            {
-                return middlename;
-            }
+        public string Nickname { get; set; }
+        
+        public string Photo { get; set; }
+ 
+        public string Title { get; set; }
 
-            set
-            {
-                this.middlename = value;
-            }
-        }
+        public string Company { get; set; }
 
-        public string Nickname
-        {
-            get
-            {
-                return nickname;
-            }
+        public string Address { get; set; }
 
-            set
-            {
-                this.nickname = value;
-            }
-        }
+        public string Home { get; set; }
 
-        public string Photo
-        {
-            get
-            {
-                return photo;
-            }
+        public string Mobile { get; set; }
 
-            set
-            {
-                this.photo = value;
-            }
-        }
-        public string Title
-        {
-            get
-            {
-                return title;
-            }
+        public string Work { get; set; }
 
-            set
-            {
-                this.title = value;
-            }
-        }
+        public string Fax { get; set; }
 
-        public string Company
-        {
-            get
-            {
-                return company;
-            }
+        public string Email { get; set; }
 
-            set
-            {
-                this.company = value;
-            }
-        }
+        public string Email2 { get; set; }
 
-        public string Address
-        {
-            get
-            {
-                return address;
-            }
+        public string Email3 { get; set; }
 
-            set
-            {
-                this.address = value;
-            }
-        }
+        public string Homepage { get; set; }
 
-        public string Home
-        {
-            get
-            {
-                return home;
-            }
+        public string Bday { get; set; }
 
-            set
-            {
-                this.home = value;
-            }
-        }
+        public string Bmonth { get; set; }
 
-        public string Mobile
-        {
-            get
-            {
-                return mobile;
-            }
+        public string Byear { get; set; }
 
-            set
-            {
-                this.mobile = value;
-            }
-        }
+        public string Ayear { get; set; }
 
-        public string Work
-        {
-            get
-            {
-                return work;
-            }
+        public string Address2 { get; set; }
 
-            set
-            {
-                this.work = value;
-            }
-        }
+        public string Phone2 { get; set; }
 
-        public string Fax
-        {
-            get
-            {
-                return fax;
-            }
+        public string Notes { get; set; }
 
-            set
-            {
-                this.fax = value;
-            }
-        }
-
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-
-            set
-            {
-                this.email = value;
-            }
-        }
-
-        public string Email2
-        {
-            get
-            {
-                return email2;
-            }
-
-            set
-            {
-                this.email2 = value;
-            }
-        }
-
-        public string Email3
-        {
-            get
-            {
-                return email3;
-            }
-
-            set
-            {
-                this.email3 = value;
-            }
-        }
-
-        public string Homepage
-        {
-            get
-            {
-                return homepage;
-            }
-
-            set
-            {
-                this.homepage = value;
-            }
-        }
-
-        public string Bday
-        {
-            get
-            {
-                return bday;
-            }
-
-            set
-            {
-                this.bday = value;
-            }
-        }
-        public string Bmonth
-        {
-            get
-            {
-                return bmonth;
-            }
-
-            set
-            {
-                this.bmonth = value;
-            }
-        }
-
-        public string Byear
-        {
-            get
-            {
-                return byear;
-            }
-
-            set
-            {
-                this.byear = value;
-            }
-        }
-
-        public string Ayear
-        {
-            get
-            {
-                return ayear;
-            }
-
-            set
-            {
-                this.ayear = value;
-            }
-        }
-        public string Address2
-        {
-            get
-            {
-                return address2;
-            }
-
-            set
-            {
-                this.address2 = value;
-            }
-        }
-        public string Phone2
-        {
-            get
-            {
-                return phone2;
-            }
-
-            set
-            {
-                this.phone2 = value;
-            }
-        }
-
-        public string Notes
-        {
-            get
-            {
-                return notes;
-            }
-
-            set
-            {
-                this.notes = value;
-            }
-        }
+        public string Id { get; set; }
     }
 }

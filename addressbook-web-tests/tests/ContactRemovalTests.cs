@@ -40,19 +40,27 @@ namespace WebAddressbookTests
             {
                  app.Contacts.CreateContact(contact);
             }
+            Assert.IsTrue(app.Contacts.ContactCreated());
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.RemovalContact(0);
 
-           Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactsCount());
+            Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactsCount());
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
 
+            ContactData toBeRemoved = oldContacts[0];
             oldContacts.RemoveAt(0); //указываем, что удален 1й в списке элемент
             Assert.AreEqual(oldContacts.Count, newContacts.Count); //прямое сравнение список
+            Assert.AreEqual(oldContacts, newContacts);
 
-            Assert.IsTrue(app.Contacts.ContactCreated()); //false
+            foreach (ContactData contactInt in newContacts)
+            {
+                Assert.AreNotEqual(contactInt.Id, toBeRemoved.Id);
+            }
+
+
         }
     }
 }

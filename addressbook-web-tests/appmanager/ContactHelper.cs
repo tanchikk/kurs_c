@@ -171,13 +171,31 @@ namespace WebAddressbookTests
                 contactCache = new List<ContactData>();
                 //List<ContactData> contacts = new List<ContactData>();
                 ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+
                 foreach (IWebElement element in elements)
                 {
                     IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                    contactCache.Add(new ContactData(cells[2].Text, cells[1].Text));
+                    contactCache.Add(new ContactData(cells[2].Text, cells[1].Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                    //{
+                    //    Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    //});
                 }
             }
             return new List<ContactData>(contactCache);
+
+            /*foreach (IWebElement element in elements)
+            {
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                contactCache.Add(new ContactData(cells[2].Text, cells[1].Text));
+                //{
+                //    Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                //});
+            }*/
+
+
 
             /*List<ContactData> contacts = new List<ContactData>();
             ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
