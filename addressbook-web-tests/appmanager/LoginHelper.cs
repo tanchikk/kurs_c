@@ -39,12 +39,18 @@ namespace WebAddressbookTests
             return IsElementPresent(By.Name("logout"));
         }
 
-        public bool IsLoggedIn(AccountData account)
+        public bool IsLoggedIn(AccountData account) // условие залогинен под ...
         {
             return IsLoggedIn()
-                && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text
-                == "(" + account.Username + ")"; //условие залогинен под ...
+                && GetLoggetUserName() == account.Username; //извлечение строки под строку, извлечение из ЮИ извлекает имя пользака залогиненного
+                
+        }
 
+        public string GetLoggetUserName() //метод проверяет логин пользака, под которым зашли
+        {
+            string text = driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text; //нашли тут элемент
+            return text.Substring(1, text.Length - 2); //вырезали из (admin) только admin без скобок, индексация с 0, но берем с 1 и длина -2
+                                                       // == System.String.Format("(${0})", account.Username); вместо "(" + account.Username + ")";
         }
 
         public void Logout()

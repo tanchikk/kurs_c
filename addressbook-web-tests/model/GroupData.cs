@@ -28,8 +28,8 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-
-            return Name == other.Name;
+            //или return Name.Equals(other.Name);
+            return Name == other.Name; 
         }
 
         public override int GetHashCode() //для стандартных методов вшитых помечают словом override

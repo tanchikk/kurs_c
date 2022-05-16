@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -31,6 +32,8 @@ namespace WebAddressbookTests
         private string address2 = "";
         private string phone2 = "";
         private string notes = "";*/
+        private string allPhones;
+        private string allEmail;
 
 
         public ContactData(string firstname, string lastname) //констурктор
@@ -158,5 +161,56 @@ namespace WebAddressbookTests
         public string Notes { get; set; }
 
         public string Id { get; set; }
+
+        public string AllPhones 
+        { 
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(Home) + CleanUp(Mobile) + CleanUp(Work) + CleanUp(Phone2)).Trim(); //склеивание 3 строки в одну + почистили от лишних символов
+                                                                                     //Trim() удаляет у строк вначале и в конце лишнее
+                }
+            }
+
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        public string AllEmail
+        {
+            get
+            {
+                if (allEmail != null)
+                {
+                    return allEmail;
+                }
+                else
+                {
+                    return (Email + Email2+ Email3).Trim();  //Trim() удаляет у строк вначале и в конце лишнее
+                }
+            }
+
+            set
+            {
+                allEmail = value;
+            }
+        }
+
+        private string CleanUp(string phone) //чистим от лишних символов телефон
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[- ()]", "") + "\r\n"; // (в чем заменяем, шаблон, на что заменяем)
+            //или так phone.Replace(" ", "").Replace("-","").Replace("(", "").Replace(")", "") + "\r\n"; //Replace("-","") вместо - делаем пустую строку
+        }
     }
 }
