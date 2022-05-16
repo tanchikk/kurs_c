@@ -20,7 +20,7 @@ namespace WebAddressbookTests
         public ContactHelper(ApplicationManager manager)
             : base(manager)
         {
-        }      
+        }
 
         public ContactHelper CreateContact(ContactData contact)
         {
@@ -175,6 +175,11 @@ namespace WebAddressbookTests
 
                 foreach (IWebElement element in elements)
                 {
+                    if (!element.Displayed) //
+                    {
+                        continue;
+                    }
+
                     IList<IWebElement> cells = element.FindElements(By.TagName("td"));
                     contactCache.Add(new ContactData(cells[2].Text, cells[1].Text)
                     {
@@ -274,10 +279,17 @@ namespace WebAddressbookTests
 
         public int GetNumberOfSearchResults()
         {
-            manager.Navigator.OpenHomePage();
+            //manager.Navigator.OpenHomePage();
             string text = driver.FindElement(By.TagName("label")).Text; //строка, к которой применяем рег.выражение
             Match m = new Regex(@"\d+").Match(text); //регулярное выражение применяем к тексту
             return Int32.Parse(m.Value); //взяли нужную часть строки
         }
+
+        public void SearchInput()
+        {
+            driver.FindElement(By.Name("searchstring")).SendKeys("a");
+        }
+
+
     }
 }

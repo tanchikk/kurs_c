@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
@@ -13,7 +14,13 @@ namespace WebAddressbookTests
         [Test]
         public void TestSearch()
         {
-            System.Console.Out.Write(app.Contacts.GetNumberOfSearchResults());
+            app.Navigator.OpenHomePage();
+            app.Contacts.SearchInput();
+            app.Contacts.GetNumberOfSearchResults();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //Console.Out.Write(app.Contacts.GetNumberOfSearchResults());
+            //Console.Out.Write(oldContacts.Count);
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetNumberOfSearchResults());
         }
     }
 }
