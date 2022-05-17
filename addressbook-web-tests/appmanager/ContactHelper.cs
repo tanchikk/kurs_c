@@ -175,9 +175,9 @@ namespace WebAddressbookTests
 
                 foreach (IWebElement element in elements)
                 {
-                    if (!element.Displayed) //
+                    if (!element.Displayed) //что не отображается - пропускается
                     {
-                        continue;
+                        continue; //пропускается
                     }
 
                     IList<IWebElement> cells = element.FindElements(By.TagName("td"));

@@ -193,7 +193,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (Email + Email2+ Email3).Trim();  //Trim() удаляет у строк вначале и в конце лишнее
+                    return (CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3)).Trim();  //Trim() удаляет у строк вначале и в конце лишнее
                 }
             }
 
