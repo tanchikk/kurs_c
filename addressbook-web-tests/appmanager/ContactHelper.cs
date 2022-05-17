@@ -289,7 +289,5 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("searchstring")).SendKeys("a");
         }
-
-
     }
 }
