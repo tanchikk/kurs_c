@@ -34,7 +34,7 @@ namespace WebAddressbookTests
         private string notes = "";*/
         private string allPhones;
         private string allEmail;
-
+        private string allContactDetails;
 
         public ContactData(string firstname, string lastname) //констурктор
         {
@@ -152,6 +152,10 @@ namespace WebAddressbookTests
 
         public string Byear { get; set; }
 
+        public string Aday { get; set; }
+
+        public string Amonth { get; set; }
+
         public string Ayear { get; set; }
 
         public string Address2 { get; set; }
@@ -161,6 +165,40 @@ namespace WebAddressbookTests
         public string Notes { get; set; }
 
         public string Id { get; set; }
+
+        public string AllContactDetails 
+        {
+            get
+            {
+                if (AllContactDetails != null)
+                {
+                    return allContactDetails;
+                }
+                else
+                {
+                    string names = Firstname + " " + Middlename + " " + Lastname;
+                    string home = "H: " + Home;
+                    string mobile = "M: " + Mobile;
+                    string work = "W: " + Work;
+                    string fax = "F: " + Fax;
+                    string homepage = "Homepage:" + "\r\n" + Homepage;
+                    string birthday = "Birthday " + Bday + ". " + Bmonth + " " + Byear + " (32)";
+                    string anniversary = "Anniversary " + Aday + ". " + Amonth + " " + Ayear + " (30)";
+                    string phone2 = "P: " + Phone2;
+
+                    return (names + "\r\n" + Nickname + "\r\n" + Photo + "\r\n" + Title + "\r\n" + Company + "\r\n"
+                        + Address + "\r\n" + "\r\n" + home + "\r\n" + mobile + "\r\n" + work + "\r\n" + fax + "\r\n"
+                        + "\r\n" + Email + "\r\n" + Email2 + "\r\n" + Email3 + homepage + "\r\n" + "\r\n" + birthday + "\r\n"
+                        + anniversary + "\r\n" + "\r\n" + Address2 + phone2 + "\r\n" + "\r\n"
+                        + Notes).Trim();
+                    //записать метод подсчета полных лет по дате рожд и закончен универ
+                }
+            }
+            set
+            {
+                allPhones = allContactDetails;
+            } 
+        }
 
         public string AllPhones 
         { 
@@ -203,6 +241,8 @@ namespace WebAddressbookTests
             }
         }
 
+        
+
         private string CleanUp(string phone) //чистим от лишних символов телефон
         {
             if (phone == null || phone == "")
@@ -213,13 +253,22 @@ namespace WebAddressbookTests
             //или так phone.Replace(" ", "").Replace("-","").Replace("(", "").Replace(")", "") + "\r\n"; //Replace("-","") вместо - делаем пустую строку
         }
 
-        private string CleanUpRN(string phone) //чистим от лишних символов телефон
+        private string CleanUpRN(string email) //чистим от лишних символов телефон
         {
-            if (phone == null || phone == "")
+            if (email == null || email == "")
             {
                 return "";
             }
-            return Regex.Replace(phone, "[ ]", "") + "\r\n";
+            return Regex.Replace(email, "[ ]", "") + "\r\n";
         }
+
+        /*private string CleanUpDetails(string detail) //чистим от лишних символов телефон
+        {
+            if (detail == null || detail == "")
+            {
+                return "";
+            }
+            return Regex.Replace(detail, "[ ]", " ") + "\r\n";
+        }*/
     }
 }
