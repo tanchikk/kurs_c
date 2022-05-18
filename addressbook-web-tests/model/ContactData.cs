@@ -193,7 +193,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3)).Trim();  //Trim() удаляет у строк вначале и в конце лишнее
+                    return (CleanUpRN(Email) + CleanUpRN(Email2) + CleanUpRN(Email3)).Trim();  //Trim() удаляет у строк вначале и в конце лишнее
                 }
             }
 
@@ -211,6 +211,15 @@ namespace WebAddressbookTests
             }
             return Regex.Replace(phone, "[- ()]", "") + "\r\n"; // (в чем заменяем, шаблон, на что заменяем)
             //или так phone.Replace(" ", "").Replace("-","").Replace("(", "").Replace(")", "") + "\r\n"; //Replace("-","") вместо - делаем пустую строку
+        }
+
+        private string CleanUpRN(string phone) //чистим от лишних символов телефон
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[ ]", "") + "\r\n";
         }
     }
 }
