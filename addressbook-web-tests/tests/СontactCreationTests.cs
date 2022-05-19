@@ -90,6 +90,8 @@ namespace WebAddressbookTests
             contact.Bday = "2";
             contact.Bmonth = "March";
             contact.Byear = "1990";
+            contact.Aday = "2";
+            contact.Amonth = "March";
             contact.Ayear = "1991";
             contact.Address2 = "Волгоград";
             contact.Phone2 = "+70000000009";

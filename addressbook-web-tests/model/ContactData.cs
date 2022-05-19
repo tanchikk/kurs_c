@@ -330,6 +330,17 @@ namespace WebAddressbookTests
 
         public string FullYears()
         {
+
+            /*string date = Bmonth + Bday + Byear;
+            var parsdate = DateTime.Parse(date);
+            DateTime today = DateTime.Today;
+            int age = today.Year - parsdate.Year;
+            if (parsdate.AddYears(age) > today)
+            {
+                age--;
+            }
+            return age;*/
+
             int age;
             if ((DateTime.Now.Month >= Convert.ToInt32(Bmonth)) && (DateTime.Now.Day >= Convert.ToInt32(Bday)))
             {

@@ -99,8 +99,8 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
             Type(By.Name("byear"), contact.Byear);
-            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("9");
-            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("September");
+            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(contact.Aday);
+            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(contact.Amonth);
             Type(By.Name("ayear"), contact.Ayear);
             Type(By.Name("address2"), contact.Address2);
             Type(By.Name("phone2"), contact.Phone2);

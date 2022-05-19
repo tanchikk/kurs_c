@@ -13,6 +13,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
+            app.Navigator.OpenHomePage();
             ContactData contact = new ContactData("Tanya", "Kaz");
             contact.Middlename = "Tan";
             contact.Nickname = "Tank";
@@ -31,6 +32,8 @@ namespace WebAddressbookTests
             contact.Bday = "2";
             contact.Bmonth = "March";
             contact.Byear = "1990";
+            contact.Aday = "2";
+            contact.Amonth = "March";
             contact.Ayear = "1991";
             contact.Address2 = "Волгоград";
             contact.Phone2 = "+70000000009";

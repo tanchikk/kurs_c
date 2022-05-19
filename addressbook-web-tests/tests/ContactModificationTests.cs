@@ -14,6 +14,8 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
+            app.Navigator.OpenHomePage();
+
             ContactData newContact = new ContactData("Tanya", "Kaz");
             newContact.Middlename = "Tan";
             newContact.Nickname = "Tank";
@@ -32,6 +34,8 @@ namespace WebAddressbookTests
             newContact.Bday = "2";
             newContact.Bmonth = "March";
             newContact.Byear = "1990";
+            newContact.Aday = "2";
+            newContact.Amonth = "March";
             newContact.Ayear = "1991";
             newContact.Address2 = "Волгоград";
             newContact.Phone2 = "+70000000009";
@@ -73,6 +77,8 @@ namespace WebAddressbookTests
         [Test]
         public void DetailsContactModificationTest()
         {
+            app.Navigator.OpenHomePage();
+
             ContactData newContact = new ContactData("Tanya", "Kaz");
             newContact.Middlename = "Tan";
             newContact.Nickname = "Tank";
@@ -91,6 +97,8 @@ namespace WebAddressbookTests
             newContact.Bday = "2";
             newContact.Bmonth = "March";
             newContact.Byear = "1990";
+            newContact.Aday = "2";
+            newContact.Amonth = "March";
             newContact.Ayear = "1991";
             newContact.Address2 = "Волгоград";
             newContact.Phone2 = "+70000000009";
