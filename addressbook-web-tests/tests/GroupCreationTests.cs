@@ -10,7 +10,7 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupCreationTests : AuthTestBase //наследник теста
     {
-        [Test]
+        /*[Test]
         public void GroupCreationTest()
         {            
             GroupData group = new GroupData("aaa"); //тут нужен 1 конструктор с параметром name, с др полями не нужен
@@ -30,9 +30,41 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups); //проверяет равность объектов
+        }*/
+
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i < 5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    Header = GenerateRandomString(100),
+                    Footer = GenerateRandomString(100)
+                });
+            }
+            return groups;
         }
 
-        [Test]
+        [Test, TestCaseSource("RandomGroupDataProvider")]
+        public void GroupCreationTest(GroupData group)
+        {
+            List<GroupData> oldGroups = app.Groups.GetGroupList(); //получение списка групп До создания новой
+
+            app.Groups.CteateGroup(group); //создание группы
+
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount()); //app.Groups.GetGroupCount() кол-во групп и сравнение 
+
+            List<GroupData> newGroups = app.Groups.GetGroupList(); //получение списка групп После создания новой            
+
+            //сортировка
+            oldGroups.Add(group); //указываем добавленный элемент
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups); //проверяет равность объектов
+        }
+
+       /* [Test]
         public void EmptyGroupCreationTest()
         {
             GroupData group = new GroupData("");
@@ -52,7 +84,7 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
-        }
+        }*/
 
         [Test]
         public void BagNameGroupCreationTest() //группа с недопустимым символом ' в имени не создается, упадет на проверке Expected:3 != But was:2

@@ -30,8 +30,8 @@ namespace WebAddressbookTests
             ContactData fromForm = app.Contacts.GetContactInformationFromEditFormDetails(); //получение инфы о контакте с формы редактир
 
             //проверки
-            Console.Out.Write(app.Contacts.GetContactInformationFromTableDetails());
-            Console.Out.Write(app.Contacts.GetContactInformationFromEditFormDetails());
+            Console.Out.Write(fromTable.AllContactDetails);
+            Console.Out.Write(fromForm.AllContactDetails);
             Assert.AreEqual(fromTable.AllContactDetails, fromForm.AllContactDetails);
         }
     }

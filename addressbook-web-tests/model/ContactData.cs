@@ -166,37 +166,33 @@ namespace WebAddressbookTests
 
         public string Id { get; set; }
 
+
         public string AllContactDetails 
         {
-            get
-            {
-                if (AllContactDetails != null)
+            //get; set;
+             get
+             {
+                if (allContactDetails != null)
                 {
                     return allContactDetails;
                 }
                 else
                 {
                     string names = Firstname + " " + Middlename + " " + Lastname;
-                    string home = "H: " + Home;
-                    string mobile = "M: " + Mobile;
-                    string work = "W: " + Work;
-                    string fax = "F: " + Fax;
-                    string homepage = "Homepage:" + "\r\n" + Homepage;
-                    string birthday = "Birthday " + Bday + ". " + Bmonth + " " + Byear + " (32)";
+                    string birthday = "Birthday " + Bday + ". " + Bmonth + " " + Byear + " (" + FullYears() + ")";
                     string anniversary = "Anniversary " + Aday + ". " + Amonth + " " + Ayear + " (30)";
-                    string phone2 = "P: " + Phone2;
+                    string allDetails = (CleanUpDetails(names) + CleanUpDetailsTwo(Nickname) 
+                        + CleanUpDetails(Title) + CleanUpDetails(Company) + CleanUpDetailsTwo(Address) + CleanUpHome(Home)
+                        + CleanUpMobile(Mobile) + CleanUpWork(Work) + CleanUpFax(Fax) + CleanUpDetails(Email) 
+                        + CleanUpDetails(Email2) + CleanUpDetails(Email3) + CleanUpHomepage(Homepage) + CleanUpDetails(birthday)
+                        + CleanUpDetailsTwo(anniversary) + CleanUpDetailsTwo(Address2) + CleanUpPhone2(Phone2) + Notes).Trim();
 
-                    return (names + "\r\n" + Nickname + "\r\n" + Photo + "\r\n" + Title + "\r\n" + Company + "\r\n"
-                        + Address + "\r\n" + "\r\n" + home + "\r\n" + mobile + "\r\n" + work + "\r\n" + fax + "\r\n"
-                        + "\r\n" + Email + "\r\n" + Email2 + "\r\n" + Email3 + homepage + "\r\n" + "\r\n" + birthday + "\r\n"
-                        + anniversary + "\r\n" + "\r\n" + Address2 + phone2 + "\r\n" + "\r\n"
-                        + Notes).Trim();
-                    //записать метод подсчета полных лет по дате рожд и закончен универ
+                    return allDetails;
                 }
             }
             set
             {
-                allPhones = allContactDetails;
+                allContactDetails = value;
             } 
         }
 
@@ -241,8 +237,6 @@ namespace WebAddressbookTests
             }
         }
 
-        
-
         private string CleanUp(string phone) //чистим от лишних символов телефон
         {
             if (phone == null || phone == "")
@@ -262,13 +256,91 @@ namespace WebAddressbookTests
             return Regex.Replace(email, "[ ]", "") + "\r\n";
         }
 
-        /*private string CleanUpDetails(string detail) //чистим от лишних символов телефон
+        private string CleanUpDetails(string detail) //чистим от лишних символов телефон
         {
             if (detail == null || detail == "")
             {
                 return "";
             }
-            return Regex.Replace(detail, "[ ]", " ") + "\r\n";
-        }*/
+            return detail + "\r\n";
+        }
+
+        private string CleanUpDetailsTwo(string detail) //чистим от лишних символов телефон
+        {
+            if (detail == null || detail == "")
+            {
+                return "";
+            }
+            return detail + "\r\n" + "\r\n";
+        }
+
+        private string CleanUpHome(string home)
+        {
+            if (home == null || home == "")
+            {
+                return "";
+            }
+            return "H: " + home + "\r\n";
+        }
+
+        private string CleanUpMobile(string mob)
+        {
+            if (mob == null || mob == "")
+            {
+                return "";
+            }
+            return "M: " + mob + "\r\n";
+        }
+
+        private string CleanUpWork(string work)
+        {
+            if (work == null || work == "")
+            {
+                return "";
+            }
+            return "W: " + work + "\r\n";
+        }
+
+        private string CleanUpFax(string f)
+        {
+            if (f == null || f == "")
+            {
+                return "";
+            }
+            return "F: " + f + "\r\n" + "\r\n";
+        }
+
+        private string CleanUpHomepage(string homepage)
+        {
+            if (homepage == null || homepage == "")
+            {
+                return "";
+            }
+            return "Homepage:" + "\r\n" + homepage + "\r\n" + "\r\n";
+        }
+
+        private string CleanUpPhone2(string phone2)
+        {
+            if (phone2 == null || phone2 == "")
+            {
+                return "";
+            }
+            return "P: " + phone2 + "\r\n" + "\r\n";
+        }
+
+        public string FullYears()
+        {
+            int age;
+            if ((DateTime.Now.Month >= Convert.ToInt32(Bmonth)) && (DateTime.Now.Day >= Convert.ToInt32(Bday)))
+            {
+                age = DateTime.Now.Year - Convert.ToInt32(Byear);
+            }   
+            else
+            {
+                age = DateTime.Now.Year - Convert.ToInt32(Byear) - 1;
+            }
+            string years = Convert.ToString(age);
+            return " (" + years + ")";
+        }
     }
 }

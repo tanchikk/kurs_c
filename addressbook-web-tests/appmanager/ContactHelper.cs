@@ -283,55 +283,74 @@ namespace WebAddressbookTests
             string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value");
             string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
-            //string allContactDetails = firstname + middlename + lastname;
             string nickname = driver.FindElement(By.Name("nickname")).GetAttribute("value");
-            string photo = driver.FindElement(By.Name("photo")).GetAttribute("value");
+
             string title = driver.FindElement(By.Name("title")).GetAttribute("value");
             string company = driver.FindElement(By.Name("company")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
-            string address2 = driver.FindElement(By.Name("address2")).Text;
-            string notes = driver.FindElement(By.Name("notes")).Text;
-            string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
+
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
             string fax = driver.FindElement(By.Name("fax")).GetAttribute("value");
-            string bday = driver.FindElement(By.Name("bday")).GetAttribute("value");
+
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
+
+                   
+
+            string bday = driver.FindElement(By.XPath("//select[@name='bday']/option[@selected='selected']")).GetAttribute("value");
+            string bmonth = driver.FindElement(By.XPath("//select[@name='bmonth']/option[@selected='selected']")).GetAttribute("value");
+            string byear = driver.FindElement(By.Name("byear")).GetAttribute("value");
+            string aday = driver.FindElement(By.XPath("//select[@name='aday']/option[@selected='selected']")).GetAttribute("value");
+            string amonth = driver.FindElement(By.XPath("//select[@name='amonth']/option[@selected='selected']")).GetAttribute("value");
+            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");
+            /*string bday = driver.FindElement(By.Name("bday")).GetAttribute("value");
             string bmonth = driver.FindElement(By.Name("bmonth")).GetAttribute("value");
             string byear = driver.FindElement(By.Name("byear")).GetAttribute("value");
             string aday = driver.FindElement(By.Name("aday")).GetAttribute("value");
             string amonth = driver.FindElement(By.Name("amonth")).GetAttribute("value");
-            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");
-            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
-            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
-            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
-            string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
-            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
-            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
-            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");*/
 
+            //string address2 = driver.FindElement(By.Name("address2")).Text;
+            string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
+            string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+            //string notes = driver.FindElement(By.Name("notes")).Text;
+            string notes = driver.FindElement(By.Name("notes")).GetAttribute("value");
+            
             return new ContactData(firstname, lastname)
             {
+                Middlename = middlename,
+                Nickname = nickname,
+
+                Company = company,
+                Title = title,
                 Address = address,
+
                 Home = homePhone,
                 Mobile = mobilePhone,
                 Work = workPhone,
-                Phone2 = phone2,
+
+                Fax = fax,
                 Email = email,
                 Email2 = email2,
                 Email3 = email3,
-                Middlename = middlename,
-                Nickname = nickname,
-                Photo = photo,
-                Title = title,
-                Company = company,
-                Address2 = address2,
-                Notes = notes,
-                Homepage = homepage,
-                Fax = fax,
+                Homepage = homepage,                
+                
                 Bday = bday,
                 Bmonth = bmonth,
                 Byear = byear,
+
                 Aday = aday,
                 Amonth = amonth,
-                Ayear = ayear
+                Ayear = ayear,
+
+                Address2 = address2,
+                Phone2 = phone2,
+                Notes = notes,
+
             };
         }
 
@@ -340,12 +359,10 @@ namespace WebAddressbookTests
             manager.Navigator.OpenHomePage();
             UnitDetailsContactModification();
 
-            string cells = driver.FindElement(By.CssSelector("div#content b")).Text;
-            string firstname = cells.Split(' ', (char)StringSplitOptions.RemoveEmptyEntries)[0]; 
-            //string middlename = cells.Split(' ', (char)StringSplitOptions.RemoveEmptyEntries)[1];
-            string lastname = cells.Split(' ', (char)StringSplitOptions.RemoveEmptyEntries)[2];
-            string allContactDetails = driver.FindElement(By.CssSelector("div#content")).Text;
+            string firstname = null;
+            string lastname = null;
 
+            string allContactDetails = driver.FindElement(By.CssSelector("div#content")).Text;
 
             return new ContactData(firstname, lastname)
             {
