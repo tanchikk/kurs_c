@@ -32,7 +32,7 @@ namespace WebAddressbookTests
             return builder.ToString();
         }
 
-        /*public static Random rndCon = new Random();
+        public static Random rndCon = new Random();
         public static string GenerateRandomStringContact(int max)
         {
             int l = Convert.ToInt32(rndCon.NextDouble() * max);
@@ -44,7 +44,7 @@ namespace WebAddressbookTests
                 builderl.Append(Convert.ToChar(32 + Convert.ToInt32(rndCon.NextDouble() * 223)));
             }
             return builderl.ToString();
-        }*/
+        }
 
     }
 }

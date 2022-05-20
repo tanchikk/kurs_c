@@ -14,7 +14,7 @@ namespace WebAddressbookTests
     public class СontactCreationTests : AuthTestBase // наследие
     {
         
-        /*public static IEnumerable<ContactData> RandomGroupDataProviderContact()
+        public static IEnumerable<ContactData> RandomGroupDataProviderContact()
         {
             List<ContactData> groups = new List<ContactData>();
             for (int i = 0; i < 5; i++)
@@ -35,13 +35,15 @@ namespace WebAddressbookTests
                     Email2 = GenerateRandomStringContact(100),
                     Email3 = GenerateRandomStringContact(100),
                     Homepage = GenerateRandomStringContact(100),
-                    //Bday = GenerateRandomStringContact(100),
-                    //Bmonth = GenerateRandomStringContact(100),
-                    //Byear = GenerateRandomStringContact(100),
-                    //Ayear = GenerateRandomStringContact(100),
-                    //Address2 = GenerateRandomStringContact(100),
-                    //Phone2 = GenerateRandomStringContact(100),
-                    //Notes = GenerateRandomStringContact(100)
+                    Bday = GenerateRandomStringContact(100),
+                    Bmonth = GenerateRandomStringContact(100),
+                    Byear = GenerateRandomStringContact(100),
+                    Aday = GenerateRandomStringContact(100),
+                    Amonth = GenerateRandomStringContact(100),
+                    Ayear = GenerateRandomStringContact(100),
+                    Address2 = GenerateRandomStringContact(100),
+                    Phone2 = GenerateRandomStringContact(100),
+                    Notes = GenerateRandomStringContact(100)
                 });
             }
             return groups;
@@ -67,9 +69,9 @@ namespace WebAddressbookTests
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
-        }*/
+        }
 
-        [Test]
+       /* [Test]
         public void СontactCreationTest()
         {         
             ContactData contact = new ContactData("Tanya", "Kaz");
