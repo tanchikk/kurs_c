@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace WebAddressbookTests
 {
@@ -179,8 +180,8 @@ namespace WebAddressbookTests
                 else
                 {
                     string names = Firstname + " " + Middlename + " " + Lastname;
-                    string birthday = "Birthday " + Bday + ". " + Bmonth + " " + Byear + " (" + FullYears() + ")";
-                    string anniversary = "Anniversary " + Aday + ". " + Amonth + " " + Ayear + " (30)";
+                    string birthday = "Birthday " + Bday + ". " + Bmonth + " " + Byear  + FullYears();
+                    string anniversary = "Anniversary " + Aday + ". " + Amonth + " " + Ayear + FullYearsAnnyvercity();
                     string allDetails = (CleanUpDetails(names) + CleanUpDetailsTwo(Nickname) 
                         + CleanUpDetails(Title) + CleanUpDetails(Company) + CleanUpDetailsTwo(Address) + CleanUpHome(Home)
                         + CleanUpMobile(Mobile) + CleanUpWork(Work) + CleanUpFax(Fax) + CleanUpDetails(Email) 
@@ -341,17 +342,55 @@ namespace WebAddressbookTests
             }
             return age;*/
 
-            int age;
-            if ((DateTime.Now.Month >= Convert.ToInt32(Bmonth)) && (DateTime.Now.Day >= Convert.ToInt32(Bday)))
+            int age = 0;
+            var cultureInfo = new CultureInfo("en-EN");
+            string date = $"{Bday} {Bmonth} {Byear}";
+            var datatime = DateTime.Parse(date, cultureInfo);
+            if (DateTime.Now.Month > datatime.Month || DateTime.Now.Month == datatime.Month && DateTime.Now.Day >= datatime.Day)
             {
-                age = DateTime.Now.Year - Convert.ToInt32(Byear);
-            }   
+                age = DateTime.Now.Year - datatime.Year;
+            }
             else
             {
-                age = DateTime.Now.Year - Convert.ToInt32(Byear) - 1;
+                age = DateTime.Now.Year - datatime.Year - 1;
             }
-            string years = Convert.ToString(age);
-            return " (" + years + ")";
+                /*if ((DateTime.Now.Month == datatime.Month))
+                {
+                    if (DateTime.Now.Day < datatime.Day)
+                    {
+                        age = DateTime.Now.Year - datatime.Year - 1;
+                    }
+                }   
+                else
+                {
+                    if (DateTime.Now.Month < datatime.Month)
+                    {
+                        age = DateTime.Now.Year - datatime.Year - 1;
+                    }
+                    else
+                    {
+                        age = DateTime.Now.Year - datatime.Year;
+                    };
+                }*/        
+            return $" ({age})";
         }
+
+        public string FullYearsAnnyvercity()
+        {           
+            int age = 0;
+            var cultureInfo = new CultureInfo("en-EN");
+            string date = $"{Aday} {Amonth} {Ayear}";
+            var datatime = DateTime.Parse(date, cultureInfo);
+            if (DateTime.Now.Month > datatime.Month || DateTime.Now.Month == datatime.Month && DateTime.Now.Day >= datatime.Day)
+            {
+                age = DateTime.Now.Year - datatime.Year;
+            }
+            else
+            {
+                age = DateTime.Now.Year - datatime.Year - 1;
+            }           
+            return $" ({age})";
+        }
+
     }
 }

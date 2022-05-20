@@ -301,18 +301,18 @@ namespace WebAddressbookTests
 
                    
 
-            string bday = driver.FindElement(By.XPath("//select[@name='bday']/option[@selected='selected']")).GetAttribute("value");
+            /*string bday = driver.FindElement(By.XPath("//select[@name='bday']/option[@selected='selected']")).GetAttribute("value");
             string bmonth = driver.FindElement(By.XPath("//select[@name='bmonth']/option[@selected='selected']")).GetAttribute("value");
             string byear = driver.FindElement(By.Name("byear")).GetAttribute("value");
             string aday = driver.FindElement(By.XPath("//select[@name='aday']/option[@selected='selected']")).GetAttribute("value");
             string amonth = driver.FindElement(By.XPath("//select[@name='amonth']/option[@selected='selected']")).GetAttribute("value");
-            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");
-            /*string bday = driver.FindElement(By.Name("bday")).GetAttribute("value");
+            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");*/
+            string bday = driver.FindElement(By.Name("bday")).GetAttribute("value");
             string bmonth = driver.FindElement(By.Name("bmonth")).GetAttribute("value");
             string byear = driver.FindElement(By.Name("byear")).GetAttribute("value");
             string aday = driver.FindElement(By.Name("aday")).GetAttribute("value");
-            string amonth = driver.FindElement(By.Name("amonth")).GetAttribute("value");
-            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");*/
+            string amonth = driver.FindElement(By.XPath("//select[@name='amonth']/option[@selected='selected']")).Text;
+            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");
 
             //string address2 = driver.FindElement(By.Name("address2")).Text;
             string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
