@@ -19,7 +19,7 @@ namespace WebAddressbookTests
             ContactData newContact = new ContactData("Tanya", "Kaz");
             newContact.Middlename = "Tan";
             newContact.Nickname = "Tank";
-            newContact.Photo = "D:\\Users\\Tanchik\\Downloads\\shopping-cart.png";
+            //newContact.Photo = "D:\\Users\\Tanchik\\Downloads\\shopping-cart.png";
             newContact.Title = "T";
             newContact.Company = "OOO";
             newContact.Address = "Москва";
@@ -82,7 +82,7 @@ namespace WebAddressbookTests
             ContactData newContact = new ContactData("Tanya", "Kaz");
             newContact.Middlename = "Tan";
             newContact.Nickname = "Tank";
-            newContact.Photo = "D:\\Users\\Tanchik\\Downloads\\shopping-cart.png";
+            //newContact.Photo = "D:\\Users\\Tanchik\\Downloads\\shopping-cart.png";
             newContact.Title = "T";
             newContact.Company = "OOO";
             newContact.Address = "Москва";

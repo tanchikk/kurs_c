@@ -84,7 +84,7 @@ namespace WebAddressbookTests
             Type(By.Name("middlename"), contact.Middlename);
             Type(By.Name("lastname"), contact.Lastname);
             Type(By.Name("nickname"), contact.Nickname);
-            Type(By.Name("photo"), contact.Photo);
+            //Type(By.Name("photo"), contact.Photo);
             Type(By.Name("title"), contact.Title);
             Type(By.Name("company"), contact.Company);
             Type(By.Name("address"), contact.Address);
@@ -96,12 +96,12 @@ namespace WebAddressbookTests
             Type(By.Name("email2"), contact.Email2);
             Type(By.Name("email3"), contact.Email3);
             Type(By.Name("homepage"), contact.Homepage);          
-            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
-            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
-            Type(By.Name("byear"), contact.Byear);
-            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(contact.Aday);
-            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(contact.Amonth);
-            Type(By.Name("ayear"), contact.Ayear);
+            //new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
+            //new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
+            //Type(By.Name("byear"), contact.Byear);
+            //new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(contact.Aday);
+            //new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(contact.Amonth);
+            //Type(By.Name("ayear"), contact.Ayear);
             Type(By.Name("address2"), contact.Address2);
             Type(By.Name("phone2"), contact.Phone2);
             Type(By.Name("notes"), contact.Notes);

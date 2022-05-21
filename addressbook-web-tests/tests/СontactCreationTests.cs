@@ -19,31 +19,31 @@ namespace WebAddressbookTests
             List<ContactData> groups = new List<ContactData>();
             for (int i = 0; i < 5; i++)
             {
-                groups.Add(new ContactData(GenerateRandomStringContact(30), GenerateRandomStringContact(30))
+                groups.Add(new ContactData(GenerateRandomStringContact(20), GenerateRandomStringContact(20))
                 {
-                    Middlename = GenerateRandomStringContact(100),
-                    Nickname = GenerateRandomStringContact(100),
+                    Middlename = GenerateRandomStringContact(20),
+                    Nickname = GenerateRandomStringContact(20),
                     //Photo = GenerateRandomStringContact(100),
-                    Title = GenerateRandomStringContact(100),
-                    Company = GenerateRandomStringContact(100),
-                    Address = GenerateRandomStringContact(100),
-                    Home = GenerateRandomStringContact(100),
-                    Mobile = GenerateRandomStringContact(100),
-                    Work = GenerateRandomStringContact(100),
-                    Fax = GenerateRandomStringContact(100),
-                    Email = GenerateRandomStringContact(100),
-                    Email2 = GenerateRandomStringContact(100),
-                    Email3 = GenerateRandomStringContact(100),
-                    Homepage = GenerateRandomStringContact(100),
-                    Bday = GenerateRandomStringContact(100),
-                    Bmonth = GenerateRandomStringContact(100),
-                    Byear = GenerateRandomStringContact(100),
-                    Aday = GenerateRandomStringContact(100),
-                    Amonth = GenerateRandomStringContact(100),
-                    Ayear = GenerateRandomStringContact(100),
-                    Address2 = GenerateRandomStringContact(100),
-                    Phone2 = GenerateRandomStringContact(100),
-                    Notes = GenerateRandomStringContact(100)
+                    Title = GenerateRandomStringContact(20),
+                    Company = GenerateRandomStringContact(20),
+                    Address = GenerateRandomStringContact(20),
+                    Home = GenerateRandomStringContact(20),
+                    Mobile = GenerateRandomStringContact(20),
+                    Work = GenerateRandomStringContact(20),
+                    Fax = GenerateRandomStringContact(20),
+                    Email = GenerateRandomStringContact(20),
+                    Email2 = GenerateRandomStringContact(20),
+                    Email3 = GenerateRandomStringContact(20),
+                    Homepage = GenerateRandomStringContact(20),
+                    //Bday = GenerateRandomStringContact(100),
+                    //Bmonth = GenerateRandomStringContact(100),
+                    //Byear = GenerateRandomStringContact(100),
+                    //Aday = GenerateRandomStringContact(100),
+                    //Amonth = GenerateRandomStringContact(100),
+                    //Ayear = GenerateRandomStringContact(100),
+                    Address2 = GenerateRandomStringContact(50),
+                    Phone2 = GenerateRandomStringContact(20),
+                    Notes = GenerateRandomStringContact(50)
                 });
             }
             return groups;
@@ -71,13 +71,13 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldContacts, newContacts);
         }
 
-       /* [Test]
-        public void СontactCreationTest()
+        /*[Test]
+        public void СontactCreationTest1()
         {         
             ContactData contact = new ContactData("Tanya", "Kaz");
             contact.Middlename = "Tan";
             contact.Nickname = "Tank";
-            contact.Photo = "D:\\Users\\Tanchik\\Downloads\\shopping-cart.png";
+            //contact.Photo = "D:\\Users\\Tanchik\\Downloads\\shopping-cart.png";
             contact.Title = "T";
             contact.Company = "OOO";
             contact.Address = "Москва";
@@ -89,12 +89,12 @@ namespace WebAddressbookTests
             contact.Email2 = "dfg@sdf2.gh";
             contact.Email3 = "dfg@sdf3.gh";
             contact.Homepage = "dfg@sdf3.gh";
-            contact.Bday = "2";
-            contact.Bmonth = "March";
-            contact.Byear = "1990";
-            contact.Aday = "2";
-            contact.Amonth = "March";
-            contact.Ayear = "1991";
+            //contact.Bday = "2";
+            //contact.Bmonth = "March";
+            //contact.Byear = "1990";
+           // contact.Aday = "2";
+            //contact.Amonth = "March";
+            //contact.Ayear = "1991";
             contact.Address2 = "Волгоград";
             contact.Phone2 = "+70000000009";
             contact.Notes = "pam";
