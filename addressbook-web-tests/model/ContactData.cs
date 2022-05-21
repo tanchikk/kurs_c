@@ -179,15 +179,10 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    string names = Firstname + " " + Middlename + " " + Lastname;
-                    string birthday = "Birthday " + Bday + ". " + Bmonth + " " + Byear  + FullYears();
-                    string anniversary = "Anniversary " + Aday + ". " + Amonth + " " + Ayear + FullYearsAnnyvercity();
-                    string allDetails = (CleanUpDetails(names) + CleanUpDetailsTwo(Nickname) 
-                        + CleanUpDetails(Title) + CleanUpDetails(Company) + CleanUpDetailsTwo(Address) + CleanUpHome(Home)
-                        + CleanUpMobile(Mobile) + CleanUpWork(Work) + CleanUpFax(Fax) + CleanUpDetails(Email) 
-                        + CleanUpDetails(Email2) + CleanUpDetails(Email3) + CleanUpHomepage(Homepage) + CleanUpDetails(birthday)
-                        + CleanUpDetailsTwo(anniversary) + CleanUpDetailsTwo(Address2) + CleanUpPhone2(Phone2) + Notes).Trim();
-
+                    string allDetails = (CleanUpDetails(GetNameFull(Firstname, Middlename, Lastname)) + CleanUpDetails(Nickname) 
+                        + CleanUpDetails(Title) + CleanUpDetails(Company) + CleanUpDetailsTwo(Address) + GetPhones(Home, Mobile, Work, Fax) 
+                        + CleanUpDetails(GetEmail(Email, Email2, Email3, Homepage)) 
+                        + CleanUpDetailsTwo(Address2) + GetPhone2(Phone2) + Notes).Trim();
                     return allDetails;
                 }
             }
@@ -257,6 +252,78 @@ namespace WebAddressbookTests
             return Regex.Replace(email, "[ ]", "") + "\r\n";
         }
 
+        private string GetNameFull(string firstname, string middlename, string lastname)
+        {
+            string bufer = "";
+            if (firstname != null && firstname != "")
+            {
+                bufer = Firstname + " ";
+            }
+            if (middlename != null && middlename != "")
+            {
+                bufer = bufer + Middlename + " ";
+            }
+            if (lastname != null && lastname != "")
+            {
+                bufer = bufer + Lastname + " ";
+            }
+            return bufer.Trim();
+        }
+
+        private string GetPhones(string home, string mobile, string work, string fax)
+        {
+            string bufer = "";
+            if (home != null && home != "")
+            {
+                bufer = bufer + "H: " + Home + "\r\n";
+            }
+            if (mobile != null && mobile != "")
+            {
+                bufer = bufer + "M: " + Mobile + "\r\n";
+            }
+            if (work != null && work != "")
+            {
+                bufer = bufer + "W: " + Work + "\r\n";
+            }
+            if (fax != null && fax != "")
+            {
+                bufer = bufer + "F: " + Fax + "\r\n" + "\r\n";
+            }
+            return bufer;
+        }
+
+        private string GetEmail(string email, string email2, string email3, string homepage)
+        {
+            string bufer = "";
+            if (email != null && email != "")
+            {
+                bufer = bufer + email + "\r\n";
+            }
+            if (email2 != null && email2 != "")
+            {
+                bufer = bufer + email2 + "\r\n";
+            }
+            if (email3 != null && email3 != "")
+            {
+                bufer = bufer + email3 + "\r\n";
+            }
+            if (homepage != null && homepage != "")
+            {
+                bufer = bufer + "Homepage:" + "\r\n" + homepage + "\r\n" + "\r\n";
+            }
+            return bufer;
+        }
+
+        private string GetPhone2(string phone2)
+        {
+            if (phone2 == null || phone2 == "")
+            {
+                return "";
+            }
+
+            return "P: " + Phone2 + "\r\n" + "\r\n";
+        }
+
         private string CleanUpDetails(string detail) //чистим от лишних символов телефон
         {
             if (detail == null || detail == "")
@@ -275,73 +342,8 @@ namespace WebAddressbookTests
             return detail + "\r\n" + "\r\n";
         }
 
-        private string CleanUpHome(string home)
+       /* public string FullYears()
         {
-            if (home == null || home == "")
-            {
-                return "";
-            }
-            return "H: " + home + "\r\n";
-        }
-
-        private string CleanUpMobile(string mob)
-        {
-            if (mob == null || mob == "")
-            {
-                return "";
-            }
-            return "M: " + mob + "\r\n";
-        }
-
-        private string CleanUpWork(string work)
-        {
-            if (work == null || work == "")
-            {
-                return "";
-            }
-            return "W: " + work + "\r\n";
-        }
-
-        private string CleanUpFax(string f)
-        {
-            if (f == null || f == "")
-            {
-                return "";
-            }
-            return "F: " + f + "\r\n" + "\r\n";
-        }
-
-        private string CleanUpHomepage(string homepage)
-        {
-            if (homepage == null || homepage == "")
-            {
-                return "";
-            }
-            return "Homepage:" + "\r\n" + homepage + "\r\n" + "\r\n";
-        }
-
-        private string CleanUpPhone2(string phone2)
-        {
-            if (phone2 == null || phone2 == "")
-            {
-                return "";
-            }
-            return "P: " + phone2 + "\r\n" + "\r\n";
-        }
-
-        public string FullYears()
-        {
-
-            /*string date = Bmonth + Bday + Byear;
-            var parsdate = DateTime.Parse(date);
-            DateTime today = DateTime.Today;
-            int age = today.Year - parsdate.Year;
-            if (parsdate.AddYears(age) > today)
-            {
-                age--;
-            }
-            return age;*/
-
             int age = 0;
             var cultureInfo = new CultureInfo("en-EN");
             string date = $"{Bday} {Bmonth} {Byear}";
@@ -353,29 +355,11 @@ namespace WebAddressbookTests
             else
             {
                 age = DateTime.Now.Year - datatime.Year - 1;
-            }
-                /*if ((DateTime.Now.Month == datatime.Month))
-                {
-                    if (DateTime.Now.Day < datatime.Day)
-                    {
-                        age = DateTime.Now.Year - datatime.Year - 1;
-                    }
-                }   
-                else
-                {
-                    if (DateTime.Now.Month < datatime.Month)
-                    {
-                        age = DateTime.Now.Year - datatime.Year - 1;
-                    }
-                    else
-                    {
-                        age = DateTime.Now.Year - datatime.Year;
-                    };
-                }*/        
+            }        
             return $" ({age})";
-        }
+        }*/
 
-        public string FullYearsAnnyvercity()
+        /*public string FullYearsAnnyvercity()
         {           
             int age = 0;
             var cultureInfo = new CultureInfo("en-EN");
@@ -390,7 +374,6 @@ namespace WebAddressbookTests
                 age = DateTime.Now.Year - datatime.Year - 1;
             }           
             return $" ({age})";
-        }
-
+        }*/
     }
 }
