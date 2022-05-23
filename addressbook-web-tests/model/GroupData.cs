@@ -12,6 +12,10 @@ namespace WebAddressbookTests
         //private string header = "";
         //private string footer = "";
 
+        public GroupData() //констурктор пустой для файлов xml and json
+        {
+        }
+
         public GroupData(string name) //констурктор c name
         {
             Name = name;

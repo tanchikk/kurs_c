@@ -7,6 +7,10 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace WebAddressbookTests
 {
@@ -23,33 +27,39 @@ namespace WebAddressbookTests
                 {
                     Middlename = GenerateRandomStringContact(20),
                     Nickname = GenerateRandomStringContact(20),
-                    //Photo = GenerateRandomStringContact(100),
-                    Title = GenerateRandomStringContact(20),
-                    Company = GenerateRandomStringContact(20),
+                    //Title = GenerateRandomStringContact(20),
+                    //Company = GenerateRandomStringContact(20),
                     Address = GenerateRandomStringContact(20),
                     Home = GenerateRandomStringContact(20),
                     Mobile = GenerateRandomStringContact(20),
                     Work = GenerateRandomStringContact(20),
-                    Fax = GenerateRandomStringContact(20),
+                    //Fax = GenerateRandomStringContact(20),
                     Email = GenerateRandomStringContact(20),
                     Email2 = GenerateRandomStringContact(20),
                     Email3 = GenerateRandomStringContact(20),
-                    Homepage = GenerateRandomStringContact(20),
-                    //Bday = GenerateRandomStringContact(100),
-                    //Bmonth = GenerateRandomStringContact(100),
-                    //Byear = GenerateRandomStringContact(100),
-                    //Aday = GenerateRandomStringContact(100),
-                    //Amonth = GenerateRandomStringContact(100),
-                    //Ayear = GenerateRandomStringContact(100),
-                    Address2 = GenerateRandomStringContact(50),
-                    Phone2 = GenerateRandomStringContact(20),
-                    Notes = GenerateRandomStringContact(50)
+                    Homepage = GenerateRandomStringContact(20)
+                    //Address2 = GenerateRandomStringContact(50),
+                    //Phone2 = GenerateRandomStringContact(20),
+                    //Notes = GenerateRandomStringContact(50)
                 });
             }
             return groups;
         }
 
-        [Test, TestCaseSource("RandomGroupDataProviderContact")]
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
+        {
+            return (List<ContactData>) //явно приводим к типу (List<GroupData>)
+                new XmlSerializer(typeof(List<ContactData>)).
+                Deserialize(new StreamReader(@"contacts.xml"));
+        }
+
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                File.ReadAllText(@"contacts.json"));
+        }
+
+        [Test, TestCaseSource("ContactDataFromJsonFile")]  
         public void СontactCreationTest(ContactData contact)
         {       
 

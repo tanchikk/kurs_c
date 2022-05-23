@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace WebAddressbookTests
 {
@@ -36,6 +39,10 @@ namespace WebAddressbookTests
         private string allPhones;
         private string allEmail;
         private string allContactDetails;
+
+        public ContactData() //констурктор
+        {
+        }
 
         public ContactData(string firstname, string lastname) //констурктор
         {
@@ -165,9 +172,10 @@ namespace WebAddressbookTests
 
         public string Notes { get; set; }
 
+        [XmlIgnore, JsonIgnore]
         public string Id { get; set; }
 
-
+        [XmlIgnore, JsonIgnore]
         public string AllContactDetails 
         {
             //get; set;
@@ -192,6 +200,7 @@ namespace WebAddressbookTests
             } 
         }
 
+        [XmlIgnore, JsonIgnore]
         public string AllPhones 
         { 
             get
@@ -213,6 +222,7 @@ namespace WebAddressbookTests
             }
         }
 
+        [XmlIgnore, JsonIgnore]
         public string AllEmail
         {
             get
@@ -342,22 +352,22 @@ namespace WebAddressbookTests
             return detail + "\r\n" + "\r\n";
         }
 
-       /* public string FullYears()
-        {
-            int age = 0;
-            var cultureInfo = new CultureInfo("en-EN");
-            string date = $"{Bday} {Bmonth} {Byear}";
-            var datatime = DateTime.Parse(date, cultureInfo);
-            if (DateTime.Now.Month > datatime.Month || DateTime.Now.Month == datatime.Month && DateTime.Now.Day >= datatime.Day)
-            {
-                age = DateTime.Now.Year - datatime.Year;
-            }
-            else
-            {
-                age = DateTime.Now.Year - datatime.Year - 1;
-            }        
-            return $" ({age})";
-        }*/
+        /* public string FullYears()
+         {
+             int age = 0;
+             var cultureInfo = new CultureInfo("en-EN");
+             string date = $"{Bday} {Bmonth} {Byear}";
+             var datatime = DateTime.Parse(date, cultureInfo);
+             if (DateTime.Now.Month > datatime.Month || DateTime.Now.Month == datatime.Month && DateTime.Now.Day >= datatime.Day)
+             {
+                 age = DateTime.Now.Year - datatime.Year;
+             }
+             else
+             {
+                 age = DateTime.Now.Year - datatime.Year - 1;
+             }        
+             return $" ({age})";
+         }*/
 
         /*public string FullYearsAnnyvercity()
         {           

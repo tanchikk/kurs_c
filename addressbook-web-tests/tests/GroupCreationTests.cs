@@ -5,6 +5,9 @@ using System.Threading;
 using System.Collections.Generic; //для List<GroupData>
 using NUnit.Framework;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace WebAddressbookTests
 {
@@ -47,7 +50,7 @@ namespace WebAddressbookTests
             return groups;
         }
 
-        public static IEnumerable<GroupData> GroupDataFromFile()
+        public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
             string[] lines = File.ReadAllLines(@"groups.csv"); //читаем все строки
@@ -63,7 +66,21 @@ namespace WebAddressbookTests
             return groups;
         }
 
-        [Test, TestCaseSource("GroupDataFromFile")]
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            //List<GroupData> groups = new List<GroupData>();
+            return (List<GroupData>) //явно приводим к типу (List<GroupData>)
+                new XmlSerializer(typeof(List<GroupData>)).
+                Deserialize(new StreamReader(@"groups.xml")); 
+        }
+
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<GroupData>>(
+                File.ReadAllText(@"groups.json"));
+        }
+
+        [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList(); //получение списка групп До создания новой
