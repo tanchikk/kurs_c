@@ -178,7 +178,6 @@ namespace WebAddressbookTests
         [XmlIgnore, JsonIgnore]
         public string AllContactDetails 
         {
-            //get; set;
              get
              {
                 if (allContactDetails != null)
@@ -187,10 +186,9 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    string allDetails = (CleanUpDetails(GetNameFull(Firstname, Middlename, Lastname)) + CleanUpDetails(Nickname) 
-                        + CleanUpDetails(Title) + CleanUpDetails(Company) + CleanUpDetailsTwo(Address) + GetPhones(Home, Mobile, Work, Fax) 
-                        + CleanUpDetails(GetEmail(Email, Email2, Email3, Homepage)) 
-                        + CleanUpDetailsTwo(Address2) + GetPhone2(Phone2) + Notes).Trim();
+                    string allDetails = (CleanUpDetails(GetContacts(Firstname, Middlename, Lastname, Nickname, Title, Company, Address))
+                        + CleanUpDetails(GetPhones(Home, Mobile, Work, Fax))
+                        + CleanUpDetails(GetEmail(Email, Email2, Email3, Homepage))).Trim();
                     return allDetails;
                 }
             }
@@ -280,6 +278,15 @@ namespace WebAddressbookTests
             return bufer.Trim();
         }
 
+        private string GetContacts(string firstname, string middlename, string lastname, string nickname, string title, string company, string address)
+        {
+            return CleanUpDetails(GetNameFull(firstname, middlename, lastname))
+                        + CleanUpDetails(nickname)
+                        + CleanUpDetails(title)
+                        + CleanUpDetails(company)
+                        + CleanUpDetails(address);
+        }
+
         private string GetPhones(string home, string mobile, string work, string fax)
         {
             string bufer = "";
@@ -297,7 +304,7 @@ namespace WebAddressbookTests
             }
             if (fax != null && fax != "")
             {
-                bufer = bufer + "F: " + Fax + "\r\n" + "\r\n";
+                bufer = bufer + "F: " + Fax  + "\r\n";
             }
             return bufer;
         }
@@ -319,7 +326,7 @@ namespace WebAddressbookTests
             }
             if (homepage != null && homepage != "")
             {
-                bufer = bufer + "Homepage:" + "\r\n" + homepage + "\r\n" + "\r\n";
+                bufer = bufer + "Homepage:" + "\r\n" + homepage + "\r\n";
             }
             return bufer;
         }

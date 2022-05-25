@@ -299,20 +299,20 @@ namespace WebAddressbookTests
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
             string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
 
-                   
+
 
             /*string bday = driver.FindElement(By.XPath("//select[@name='bday']/option[@selected='selected']")).GetAttribute("value");
             string bmonth = driver.FindElement(By.XPath("//select[@name='bmonth']/option[@selected='selected']")).GetAttribute("value");
             string byear = driver.FindElement(By.Name("byear")).GetAttribute("value");
             string aday = driver.FindElement(By.XPath("//select[@name='aday']/option[@selected='selected']")).GetAttribute("value");
             string amonth = driver.FindElement(By.XPath("//select[@name='amonth']/option[@selected='selected']")).GetAttribute("value");
-            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");*/
+            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");
             string bday = driver.FindElement(By.Name("bday")).GetAttribute("value");
             string bmonth = driver.FindElement(By.Name("bmonth")).GetAttribute("value");
             string byear = driver.FindElement(By.Name("byear")).GetAttribute("value");
             string aday = driver.FindElement(By.Name("aday")).GetAttribute("value");
             string amonth = driver.FindElement(By.XPath("//select[@name='amonth']/option[@selected='selected']")).Text;
-            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");
+            string ayear = driver.FindElement(By.Name("ayear")).GetAttribute("value");*/
 
             //string address2 = driver.FindElement(By.Name("address2")).Text;
             string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
@@ -339,13 +339,13 @@ namespace WebAddressbookTests
                 Email3 = email3,
                 Homepage = homepage,                
                 
-                Bday = bday,
+                /*Bday = bday,
                 Bmonth = bmonth,
                 Byear = byear,
 
                 Aday = aday,
                 Amonth = amonth,
-                Ayear = ayear,
+                Ayear = ayear,*/
 
                 Address2 = address2,
                 Phone2 = phone2,

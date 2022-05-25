@@ -73,7 +73,7 @@ namespace addressbook_test_data_generators
             {
                 writeGroupsToCsvFile(groups, writer);
             } */
-             if (format == "xml")
+            if (format == "xml")
             {
                 if (type == "groups")
                 {
