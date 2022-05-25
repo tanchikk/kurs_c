@@ -8,11 +8,12 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase //наследник теста
+    public class GroupCreationTests : GroupTestBase //наследник теста
     {
         /*[Test]
         public void GroupCreationTest()
@@ -83,13 +84,15 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList(); //получение списка групп До создания новой
+            //List<GroupData> oldGroups = app.Groups.GetGroupList(); //получение списка групп До создания новой
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             app.Groups.CteateGroup(group); //создание группы
 
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount()); //app.Groups.GetGroupCount() кол-во групп и сравнение 
 
-            List<GroupData> newGroups = app.Groups.GetGroupList(); //получение списка групп После создания новой            
+            //List<GroupData> newGroups = app.Groups.GetGroupList(); //получение списка групп После создания новой            
+            List<GroupData> newGroups = GroupData.GetAll();
 
             //сортировка
             oldGroups.Add(group); //указываем добавленный элемент
@@ -140,6 +143,30 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+        }
+
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUi = app.Groups.GetGroupList(); //чтение из ЮИ
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start)); //end минус start
+
+            start = DateTime.Now;
+            List<GroupData> fromDb = GroupData.GetAll();
+           /*using (AddressBookDB db = new AddressBookDB())
+           {
+               List<GroupData> fromDb = (from g in db.Groups select g).ToList(); //чтение из БД
+               //db.Close(); вызывается автоматом
+           }
+
+           AddressBookDB db = new AddressBookDB();
+           List<GroupData> fromDb = (from g in db.Groups select g).ToList(); //чтение из БД
+           db.Close(); //закрыли бд*/
+
+           end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
         }
     }
 }

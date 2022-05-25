@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupModificationTests : AuthTestBase
+    public class GroupModificationTests : GroupTestBase
     {
         [Test]
         public void GroupModificationTest()
@@ -25,14 +25,18 @@ namespace WebAddressbookTests
                 app.Groups.CteateGroup(newData);
             }
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            //List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
+
             GroupData oldData = oldGroups[0]; //запоминаем группу, которую будем менять
-            
-            app.Groups.Modify(0, newData); //сама модификация
+
+            //app.Groups.Modify(0, newData); //сама модификация
+            app.Groups.Modify(oldData, newData);
 
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount()); //не изменено кол-во
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            //List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
 
             //сортировка
             oldGroups[0].Name = newData.Name; //у элемента меняем имя, который модифицировали

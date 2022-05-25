@@ -36,6 +36,15 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupHelper Removal(GroupData group)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(group.Id);
+            RemoveGroup();
+            ReturnToGroupsPage();
+            return this;
+        }
+
         /*public bool GroupCreated(GroupData group)
         {
             return GroupCreated()
@@ -57,6 +66,17 @@ namespace WebAddressbookTests
             FillGroupForm(newData);
             SubmitGroupModification();
             ReturnToGroupsPage();       
+
+        }
+
+        public void Modify(GroupData group, GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(group.Id);
+            UnitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
 
         }
 
@@ -87,13 +107,19 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupHelper SelectGroup(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click(); //index+1 для XPath чтобы нумерация шла с 0
+            return this;
+        }
+
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
             groupCache = null;
             return this;
         }
-        //для группы конец
 
         public GroupHelper SubmitGroupCreation() 
         {
@@ -132,10 +158,26 @@ namespace WebAddressbookTests
                                                                                                        // ICollection - общий тип, List - конкретный тип
                 foreach (IWebElement element in elements)
                 {             
-                    groupCache.Add(new GroupData(element.Text)
+                    groupCache.Add(new GroupData(null) //element.Text
                     {
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                     });
+                }
+
+                string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+                string[] parts = allGroupNames.Split('\n');
+                int shift = groupCache.Count - parts.Length;
+                for (int i = 0; i < groupCache.Count; i++)
+                {
+                    if (i < shift)
+                    {
+                        groupCache[i].Name = "";
+                    }
+                    else
+                    {
+                        groupCache[i].Name = parts[i - shift].Trim();
+                    }
+
                 }
             }
 
