@@ -7,19 +7,19 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    public class GroupTestBase : AuthTestBase
+    public class ContactTestBase : AuthTestBase
     {
         [TearDown] //будет выполлняться после каждого теста в конце
-        public void CompareGroupsUI_DB()
+        public void CompareContactsUI_DB()
         {
             if (PERFORM_LONG_UI_CHECKS)
             {
-                List<GroupData> fromUI = app.Groups.GetGroupList();
-                List<GroupData> fromDB = GroupData.GetAll();
+                List<ContactData> fromUI = app.Contacts.GetContactList();
+                List<ContactData> fromDB = ContactData.GetContactAll();
                 fromUI.Sort();
                 fromDB.Sort();
                 Assert.AreEqual(fromUI, fromDB);
-            } 
+            }
         }
     }
 }

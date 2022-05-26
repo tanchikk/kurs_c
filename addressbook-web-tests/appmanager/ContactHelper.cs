@@ -39,11 +39,26 @@ namespace WebAddressbookTests
             return this;
         }
 
-        
-
-        public void Modify(ContactData newContact)
+        public ContactHelper RemovalContact(ContactData contact)
         {
-            UnitContactModification();
+            SelectContact(contact.Id);
+            RemoveContact();
+            manager.Navigator.OpenHomePage();
+            return this;
+        }
+
+
+        public void Modify(ContactData newContact, int v)
+        {
+            UnitContactModification(v);
+            FillContactForm(newContact);
+            SubmitContactModification();
+            manager.Navigator.OpenHomePage();
+        }
+
+        public void Modify(ContactData newContact, ContactData contact)
+        {
+            UnitContactModification(contact.Id);
             FillContactForm(newContact);
             SubmitContactModification();
             manager.Navigator.OpenHomePage();
@@ -138,6 +153,13 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper SelectContact(String id)
+        {
+            //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            return this;
+        }
+
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -145,12 +167,21 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper UnitContactModification()
+        public ContactHelper UnitContactModification(int index)
         {
-            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[7] //элемент редактировния с индексом 7
+                .FindElement(By.TagName("a")).Click();
+            //driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index + 1) + "]")).Click();
             return this;
         }
-      
+
+        public ContactHelper UnitContactModification(String id)
+        {
+            driver.FindElement(By.XPath(String.Format("//a[@href='edit.php?id={0}']", id))).Click();
+            return this;
+        }
+
 
         public ContactHelper UnitDetailsContactModification()
         {
@@ -249,7 +280,7 @@ namespace WebAddressbookTests
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.OpenHomePage();
-            UnitContactModification();
+            UnitContactModification(index);
             string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
@@ -276,10 +307,10 @@ namespace WebAddressbookTests
             };            
         }
 
-        public ContactData GetContactInformationFromEditFormDetails() //для 12
+        public ContactData GetContactInformationFromEditFormDetails(int index) //для 12
         {
             manager.Navigator.OpenHomePage();
-            UnitContactModification();
+            UnitContactModification(index);
             string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string middlename = driver.FindElement(By.Name("middlename")).GetAttribute("value");
             string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");

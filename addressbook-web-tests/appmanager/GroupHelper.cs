@@ -158,13 +158,13 @@ namespace WebAddressbookTests
                                                                                                        // ICollection - общий тип, List - конкретный тип
                 foreach (IWebElement element in elements)
                 {             
-                    groupCache.Add(new GroupData(null) //element.Text
+                    groupCache.Add(new GroupData(element.Text) //null
                     {
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                     });
                 }
 
-                string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+                /*string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
                 string[] parts = allGroupNames.Split('\n');
                 int shift = groupCache.Count - parts.Length;
                 for (int i = 0; i < groupCache.Count; i++)
@@ -178,7 +178,7 @@ namespace WebAddressbookTests
                         groupCache[i].Name = parts[i - shift].Trim();
                     }
 
-                }
+                }*/
             }
 
             return new List<GroupData>(groupCache); //кэш в список, тк просто кэш лучше не возвращать

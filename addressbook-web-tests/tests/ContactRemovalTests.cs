@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : ContactTestBase
     {
         [Test]
         public void ContactRemovalTest()
@@ -17,7 +17,7 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("Tanya", "Kaz");
             contact.Middlename = "Tan";
             contact.Nickname = "Tank";
-            contact.Photo = "D:\\Users\\Tanchik\\Downloads\\shopping-cart.png";
+            //contact.Photo = "D:\\Users\\Tanchik\\Downloads\\shopping-cart.png";
             contact.Title = "T";
             contact.Company = "OOO";
             contact.Address = "Москва";
@@ -29,12 +29,12 @@ namespace WebAddressbookTests
             contact.Email2 = "dfg@sdf2.gh";
             contact.Email3 = "dfg@sdf3.gh";
             contact.Homepage = "dfg@sdf3.gh";
-            contact.Bday = "2";
-            contact.Bmonth = "March";
-            contact.Byear = "1990";
-            contact.Aday = "2";
-            contact.Amonth = "March";
-            contact.Ayear = "1991";
+            //contact.Bday = "2";
+            //contact.Bmonth = "March";
+            //contact.Byear = "1990";
+            //contact.Aday = "2";
+            //contact.Amonth = "March";
+            //contact.Ayear = "1991";
             contact.Address2 = "Волгоград";
             contact.Phone2 = "+70000000009";
             contact.Notes = "pam";
@@ -45,15 +45,18 @@ namespace WebAddressbookTests
             }
             Assert.IsTrue(app.Contacts.ContactCreated());
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetContactAll();
 
-            app.Contacts.RemovalContact(0);
+            ContactData toBeRemoved = oldContacts[0];
+            app.Contacts.RemovalContact(toBeRemoved);
 
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactsCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetContactAll();
 
-            ContactData toBeRemoved = oldContacts[0];
+            //ContactData toBeRemoved = oldContacts[0];
             oldContacts.RemoveAt(0); //указываем, что удален 1й в списке элемент
             Assert.AreEqual(oldContacts.Count, newContacts.Count); //прямое сравнение список
             Assert.AreEqual(oldContacts, newContacts);

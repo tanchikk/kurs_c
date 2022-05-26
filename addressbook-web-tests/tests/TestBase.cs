@@ -9,6 +9,7 @@ namespace WebAddressbookTests
 {
     public class TestBase //класс для наследования (поля и классы public / protected для доступа к ним)
     {
+        public static bool PERFORM_LONG_UI_CHECKS = false; //true включить проверку через ЮИ
         protected ApplicationManager app;
 
         [SetUp]

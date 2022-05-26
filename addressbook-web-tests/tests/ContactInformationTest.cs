@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactInformationTest : AuthTestBase
+    public class ContactInformationTest : ContactTestBase
     {
         [Test]
         public void TestContactInformation() //сравнение инфы контакта с гл.страницы и редактируемой
@@ -27,7 +27,7 @@ namespace WebAddressbookTests
         public void TestContactInformationDetails() //сравнение инфы контакта с гл.страницы и редактируемой
         {
             ContactData fromTable = app.Contacts.GetContactInformationFromTableDetails(); //получение инфы о контакте с гл.страницы
-            ContactData fromForm = app.Contacts.GetContactInformationFromEditFormDetails(); //получение инфы о контакте с формы редактир
+            ContactData fromForm = app.Contacts.GetContactInformationFromEditFormDetails(0); //получение инфы о контакте с формы редактир
 
             //проверки
             Console.Out.Write(fromTable.AllContactDetails);

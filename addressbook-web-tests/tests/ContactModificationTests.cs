@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
         [Test]
         public void ContactModificationTest()
@@ -31,12 +31,12 @@ namespace WebAddressbookTests
             newContact.Email2 = "dfg@sdf2.gh";
             newContact.Email3 = "dfg@sdf3.gh";
             newContact.Homepage = "dfg@sdf3.gh";
-            newContact.Bday = "2";
-            newContact.Bmonth = "March";
-            newContact.Byear = "1990";
-            newContact.Aday = "2";
-            newContact.Amonth = "March";
-            newContact.Ayear = "1991";
+            //newContact.Bday = "2";
+            //newContact.Bmonth = "March";
+            //newContact.Byear = "1990";
+            //newContact.Aday = "2";
+            //newContact.Amonth = "March";
+            //newContact.Ayear = "1991";
             newContact.Address2 = "Волгоград";
             newContact.Phone2 = "+70000000009";
             newContact.Notes = "pam";
@@ -46,14 +46,17 @@ namespace WebAddressbookTests
                 app.Contacts.CreateContact(newContact);
             }
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            //List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetContactAll();
+
             ContactData oldDataCon = oldContacts[0];
 
-            app.Contacts.Modify(newContact);
+            app.Contacts.Modify(newContact, oldDataCon);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactsCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            //List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetContactAll();
 
             oldContacts[0].Firstname = newContact.Firstname;
             oldContacts[0].Lastname = newContact.Lastname;
@@ -94,12 +97,12 @@ namespace WebAddressbookTests
             newContact.Email2 = "dfg@sdf2.gh";
             newContact.Email3 = "dfg@sdf3.gh";
             newContact.Homepage = "dfg@sdf3.gh";
-            newContact.Bday = "2";
-            newContact.Bmonth = "March";
-            newContact.Byear = "1990";
-            newContact.Aday = "2";
-            newContact.Amonth = "March";
-            newContact.Ayear = "1991";
+            //newContact.Bday = "2";
+            //newContact.Bmonth = "March";
+            //newContact.Byear = "1990";
+            //newContact.Aday = "2";
+            //newContact.Amonth = "March";
+            //newContact.Ayear = "1991";
             newContact.Address2 = "Волгоград";
             newContact.Phone2 = "+70000000009";
             newContact.Notes = "pam";
@@ -112,7 +115,7 @@ namespace WebAddressbookTests
             List<ContactData> oldContacts = app.Contacts.GetContactList();
             ContactData oldDataCon = oldContacts[0];
 
-            app.Contacts.Modify(newContact);
+            app.Contacts.Modify(newContact, 0);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactsCount());
 
