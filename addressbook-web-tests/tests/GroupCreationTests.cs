@@ -168,5 +168,14 @@ namespace WebAddressbookTests
            end = DateTime.Now;
             System.Console.Out.WriteLine(end.Subtract(start));
         }
+
+        [Test]
+        public void TestDBConnectivityTwo()
+        {
+            foreach (ContactData contact in GroupData.GetAll()[0].GetContacts()) //берем 0ю группу  получаем список контактов с ней
+            {
+                System.Console.Out.WriteLine(contact);
+            }
+        }
     }
 }

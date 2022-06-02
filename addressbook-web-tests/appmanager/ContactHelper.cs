@@ -29,7 +29,7 @@ namespace WebAddressbookTests
             SubmitContactCreation();
             ReturnToContactPage();
             return this;
-        }
+        }     
 
         public ContactHelper RemovalContact(int v)
         {       
@@ -153,10 +153,11 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper SelectContact(String id)
+        public ContactHelper SelectContact(String contactid)
         {
             //driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
-            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            //driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            driver.FindElement(By.Id(contactid)).Click();
             return this;
         }
 
@@ -412,6 +413,52 @@ namespace WebAddressbookTests
         public void SearchInput()
         {
             driver.FindElement(By.Name("searchstring")).SendKeys("a");
+        }
+
+        public void AddContactToGroup(ContactData contact, GroupData group) //добавление группы в контакт
+        {
+            manager.Navigator.OpenHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0); //подождать появления сообщения о том, что группа добавлена (кол-во эл-тов > 0), а потом считывается в тесте новый список
+        }
+
+        private void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        private void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        private void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+
+        public void RemoveContactFromGroup(ContactData contact, GroupData group) //добавление группы в контакт
+        {
+            manager.Navigator.OpenHomePage();
+            SelectGroupToRemove(group.Name);
+            SelectContact(contact.Id);
+            CommitRemovingContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0); //подождать появления сообщения о том, что группа добавлена (кол-во эл-тов > 0), а потом считывается в тесте новый список
+        }
+
+        private void CommitRemovingContactFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        private void SelectGroupToRemove(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
         }
     }
 }

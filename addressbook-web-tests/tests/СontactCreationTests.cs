@@ -95,6 +95,11 @@ namespace WebAddressbookTests
             List<ContactData> fromDb = ContactData.GetContactAll();
             end = DateTime.Now;
             System.Console.Out.WriteLine(end.Subtract(start));
+
+            /*foreach (ContactData contact in ContactData.GetContactAll()) //проверка дат
+            {
+                System.Console.Out.WriteLine(contact.Deprecated);
+            }*/
         }
 
         /*[Test]
