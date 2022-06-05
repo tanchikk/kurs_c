@@ -198,5 +198,18 @@ namespace WebAddressbookTests
         {
             return driver.FindElements(By.CssSelector("span.group")).Count;
         }
+
+        public GroupHelper GroupExistence() //проверка что группа создана, иначе создать ее
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (!GroupCreated())
+            {
+                GroupData group = new GroupData("zzz");
+                group.Header = "ttt";
+                group.Footer = "kkk";
+                CteateGroup(group);
+            }
+            return this;
+        }
     }
 }

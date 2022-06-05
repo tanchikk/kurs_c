@@ -460,5 +460,37 @@ namespace WebAddressbookTests
         {
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
         }
+
+        public ContactHelper ContactExistance() //проверка что контакт создан, иначе создать его
+        {
+            manager.Navigator.OpenHomePage();
+            if (!IsElementPresent(By.Name("entry")))
+            {
+                ContactData contact = new ContactData("First", "Last");
+                CreateContact(contact);
+            }
+            return this;
+        }
+
+        public void InContactsExistGroup(GroupData group) //проверка есть ли контакт в группе - удалить группу
+        {
+            if (ContactData.GetContactAll().Except(group.GetContacts()).Count() == 0)
+            {
+                ContactData contact = group.GetContacts().First();
+
+                RemoveContactFromGroup(contact, group);
+            }
+        }
+
+        public void NoContactsExistInGroup(GroupData group) //проверка если нет контакта в группе - добавить группу
+        {
+            if (group.GetContacts().Count() == 0)
+            {
+                ContactData contact = ContactData.GetContactAll().First();
+
+                AddContactToGroup(contact, group);
+            }
+        }
+
     }
 }
