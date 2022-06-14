@@ -17,8 +17,8 @@ namespace mantis_tests
             {
                 ProjectData project = new ProjectData()
                 {
-                    Name = "Project",
-                    Description = ""
+                    Name = GenerateRandomString(10),
+                    Description = GenerateRandomString(10)
                 };
                 app.Projects.Create(project);
             }
