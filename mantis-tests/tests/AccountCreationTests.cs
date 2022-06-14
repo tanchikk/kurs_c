@@ -9,13 +9,16 @@ namespace mantis_tests
     [TestFixture]
     public class AccountCreationTests : TestBase
     {
+
+        //public string localPath = TestContext.CurrentContext.TestDirectory + @"\config_inc.php";
         [OneTimeSetUp] //замена файла
         public void setUpConfig()
         {
-            app.Ftp.BackupFile("/config/config_inc.php"); //или /config_inc.php
-            using (Stream localFile = File.Open("config_inc.php", FileMode.Open)) //открытие на чтнеие файла
+            string localPath = TestContext.CurrentContext.TestDirectory + @"\config_inc.php";
+            app.Ftp.BackupFile("/config_inc.php"); //или /config_inc.php
+            using (Stream localFile = File.Open(localPath, FileMode.Open)) //открытие на чтнеие файла
             {
-                app.Ftp.Upload("/config/config_inc.php", localFile);
+                app.Ftp.Upload("/config_inc.php", localFile);
             }
         }
 
@@ -35,7 +38,7 @@ namespace mantis_tests
         [OneTimeTearDown] //восстановление файла
         public void restorConfig()
         {
-            app.Ftp.RestoreBackupFile("/config/config_inc.php");
+            app.Ftp.RestoreBackupFile("/config_inc.php");
         }
     }
 }

@@ -23,6 +23,15 @@ namespace mantis_tests
             driver.FindElement(By.LinkText("Продолжить")).Click();
         }
 
+        public void Create(AccountData account, ProjectData projectData)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData project = new Mantis.ProjectData();
+            project.name = projectData.Name;
+            client.mc_project_add(account.Name, account.Password, project);
+        }
+
+
         public void Remove(ProjectData project)
         {
             manager.Menu.GoToProgectTab();
@@ -78,5 +87,25 @@ namespace mantis_tests
             }
             return list;
         }
+
+        public List<ProjectData> GetProjectList(AccountData account)
+        {
+            List<ProjectData> list = new List<ProjectData>();
+
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData[] projects = client.mc_projects_get_user_accessible(account.Name, account.Password);
+            foreach (Mantis.ProjectData project in projects)
+            {
+                list.Add(new ProjectData()
+                {
+                    Name = project.name,
+                    Description = project.description
+                });
+            }
+
+
+            return list;
+        }
+
     }
 }

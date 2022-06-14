@@ -29,7 +29,7 @@ namespace mantis_tests
             Projects = new ProjectManagementHelper(this);
             Auth = new LoginHelper(this);
             Menu = new ManagementMenuHelper(this);
-
+            API = new APIHelper(this);
         }
 
          ~ApplicationManager() //диструктор чтобы убрать тестдаун
@@ -69,5 +69,6 @@ namespace mantis_tests
         public ProjectManagementHelper Projects { get; set; }
         public LoginHelper Auth { get; set; }
         public ManagementMenuHelper Menu { get; set; }
+        public APIHelper API { get; set; }
     }
 }

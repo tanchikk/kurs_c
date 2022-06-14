@@ -37,5 +37,33 @@ namespace mantis_tests
 
             Assert.AreEqual(oldProgects, newProgects);
         }
+
+        [Test]
+        public void ProjectRemovalAPITest()
+        {
+            if (app.Projects.GetProjectList().Count == 0)
+            {
+                ProjectData project = new ProjectData()
+                {
+                    Name = GenerateRandomString(10),
+                    Description = GenerateRandomString(10)
+                };
+                app.Projects.Create(account, project);
+            }
+
+            List<ProjectData> oldProgects = app.Projects.GetProjectList(account);
+
+            ProjectData toBeRemoved = oldProgects[0];
+
+            app.Projects.Remove(toBeRemoved);
+
+            List<ProjectData> newProgects = app.Projects.GetProjectList(account);
+
+            oldProgects.RemoveAt(0);
+            oldProgects.Sort();
+            newProgects.Sort();
+
+            Assert.AreEqual(oldProgects, newProgects);
+        }
     }
 }
